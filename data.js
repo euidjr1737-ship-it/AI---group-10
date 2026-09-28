@@ -1,19 +1,14 @@
 /* ============================================================
    ADHD · 30 DAYS PROJECT
+   data.js
 
-   앞으로 수정하는 방법
-   1. 사진은 images 폴더에 넣기
-   2. image에 사진 경로 입력
-   3. videos에 YouTube 링크 입력
-   4. 새로운 날짜는 DAYS 안에 추가
+   ★ 앞으로 작업물을 추가할 때는 여기만 수정하면 됩니다.
    ============================================================ */
 
 
 const SITE = {
 
   title: "ADHD",
-
-  subtitle: "30 DAYS PROJECT · 2026",
 
   members: [
     { name: "이청하" },
@@ -25,10 +20,19 @@ const SITE = {
 
 
 /* ============================================================
-   날짜별 작업 기록
+   DAY 01 ~ DAY 30
+
+   image  = 이미지 파일 이름
+   videos = 유튜브 링크
+
+   아직 작업 안 한 날은 비워두면 됩니다.
    ============================================================ */
 
+
 const DAYS = [
+
+
+  /* DAY 01 */
 
   {
     day: 1,
@@ -39,7 +43,328 @@ const DAYS = [
 
     image: "day1-character.png",
 
-    youtube: "https://youtu.be/ehvclCeThqU?si=tW2yPpjOtClHBhgE"
+    videos: [
+      "https://youtu.be/ehvclCeThqU?si=tW2yPpjOtClHBhgE"
+    ]
+  },
+
+
+  /* DAY 02 */
+
+  {
+    day: 2,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 03 */
+
+  {
+    day: 3,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 04 */
+
+  {
+    day: 4,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 05 */
+
+  {
+    day: 5,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 06 */
+
+  {
+    day: 6,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 07 */
+
+  {
+    day: 7,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 08 */
+
+  {
+    day: 8,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 09 */
+
+  {
+    day: 9,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 10 */
+
+  {
+    day: 10,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 11 */
+
+  {
+    day: 11,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 12 */
+
+  {
+    day: 12,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 13 */
+
+  {
+    day: 13,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 14 */
+
+  {
+    day: 14,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 15 */
+
+  {
+    day: 15,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 16 */
+
+  {
+    day: 16,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 17 */
+
+  {
+    day: 17,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 18 */
+
+  {
+    day: 18,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 19 */
+
+  {
+    day: 19,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 20 */
+
+  {
+    day: 20,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 21 */
+
+  {
+    day: 21,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 22 */
+
+  {
+    day: 22,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 23 */
+
+  {
+    day: 23,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 24 */
+
+  {
+    day: 24,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 25 */
+
+  {
+    day: 25,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 26 */
+
+  {
+    day: 26,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 27 */
+
+  {
+    day: 27,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 28 */
+
+  {
+    day: 28,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 29 */
+
+  {
+    day: 29,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
+  },
+
+
+  /* DAY 30 */
+
+  {
+    day: 30,
+    date: "",
+    title: "",
+    image: "",
+    videos: []
   }
 
 ];
