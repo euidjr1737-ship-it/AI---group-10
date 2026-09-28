@@ -1,288 +1,251 @@
 /* ============================================================
    ADHD · 30 DAYS PROJECT
-   script.js
    ============================================================ */
 
-const $ = s => document.querySelector(s);
 
-const esc = s =>
-  String(s ?? "").replace(
+const $ = selector =>
+  document.querySelector(selector);
+
+
+const esc = value =>
+  String(value ?? "").replace(
     /[&<>"']/g,
-    c => ({
+    char => ({
       "&": "&amp;",
       "<": "&lt;",
       ">": "&gt;",
       '"': "&quot;",
       "'": "&#39;"
-    }[c])
+    }[char])
   );
 
-const pad = n => String(n).padStart(2, "0");
+
+const pad = number =>
+  String(number).padStart(2, "0");
+
 
 const TOTAL = 30;
 
 
+
 /* ============================================================
-   YOUTUBE / GOOGLE DRIVE / MP4
+   VIDEO EMBED
+
+   YouTube
+   Google Drive
+   MP4
    ============================================================ */
+
 
 function embed(url) {
 
   url = String(url || "").trim();
 
-  let m = url.match(
-    /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/
-  );
 
-  if (m) {
-    return `
-      <div class="video">
-        <iframe
-          src="https://www.youtube.com/embed/${m[1]}"
-          title="YouTube video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
-      </div>
-    `;
+  if (!url) {
+    return "";
   }
 
 
-  m =
+  /* YouTube */
+
+  let match = url.match(
+    /(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([\w-]{11})/
+  );
+
+
+  if (match) {
+
+    return `
+
+      <div class="video">
+
+        <iframe
+          src="https://www.youtube.com/embed/${match[1]}"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /* Google Drive */
+
+  match =
     url.match(/drive\.google\.com\/file\/d\/([\w-]+)/) ||
     url.match(/drive\.google\.com\/.*[?&]id=([\w-]+)/);
 
 
-  if (m) {
+  if (match) {
+
     return `
+
       <div class="video">
+
         <iframe
-          src="https://drive.google.com/file/d/${m[1]}/preview"
-          allow="autoplay; fullscreen"
-          allowfullscreen
-          loading="lazy">
+          src="https://drive.google.com/file/d/${match[1]}/preview"
+          allow="autoplay"
+          allowfullscreen>
         </iframe>
+
       </div>
+
     `;
+
   }
 
 
+
+  /* MP4 / WEBM */
+
   if (/\.(mp4|webm)(\?|$)/i.test(url)) {
+
     return `
+
       <div class="video">
+
         <video
           src="${esc(url)}"
           controls>
         </video>
+
       </div>
+
     `;
+
   }
 
 
   return "";
+
 }
+
 
 
 /* ============================================================
    DAY DATA
    ============================================================ */
 
-const byDay = n =>
-  DAYS.find(d => d.day === n);
 
+function byDay(number) {
 
-/*
-   image 또는 videos가 있으면
-   "기록된 날"로 표시
-*/
-
-const has = d =>
-  d &&
-  (
-    d.image ||
-    (d.videos && d.videos.length)
+  return DAYS.find(
+    item => item.day === number
   );
 
-
-const recorded =
-  DAYS
-    .filter(has)
-    .map(d => d.day);
+}
 
 
-const latest =
-  recorded.length
-    ? Math.max(...recorded)
-    : 1;
+
+function hasContent(day) {
+
+  if (!day) return false;
+
+
+  return Boolean(
+
+    day.image ||
+
+    (
+      Array.isArray(day.videos) &&
+      day.videos.length
+    )
+
+  );
+
+}
+
+
+
+const recorded = DAYS
+  .filter(hasContent)
+  .map(day => day.day);
+
+
+
+const latest = recorded.length
+  ? Math.max(...recorded)
+  : 1;
+
 
 
 /* ============================================================
-   DAY 01 ~ DAY 30 NAVIGATION
+   DAY 01 ~ 30 STRIP
    ============================================================ */
+
 
 function strip(active) {
 
   let html = "";
 
 
-  for (let i = 1; i <= TOTAL; i++) {
+  for (
+    let day = 1;
+    day <= TOTAL;
+    day++
+  ) {
 
     const classes = [
       "cell",
-      recorded.includes(i) ? "has" : "",
-      i === active ? "on" : ""
+
+      recorded.includes(day)
+        ? "has"
+        : "",
+
+      day === active
+        ? "on"
+        : ""
+
     ]
       .filter(Boolean)
       .join(" ");
 
 
     html += `
+
       <a
         class="${classes}"
-        href="#day-${pad(i)}"
-        aria-label="Day ${pad(i)}">
-        ${pad(i)}
+        href="#day-${pad(day)}"
+        aria-label="Day ${pad(day)}">
+
+        ${pad(day)}
+
       </a>
+
     `;
+
   }
 
 
   return `
+
     <div class="strip">
       ${html}
     </div>
+
   `;
+
 }
 
 
-/* ============================================================
-   DAY 화면
-   ============================================================ */
-
-function dayHTML(n) {
-
-  const d = byDay(n) || {
-    day: n,
-    title: "",
-    date: "",
-    image: "",
-    videos: []
-  };
-
-
-  const prev =
-    n > 1
-      ? `<a href="#day-${pad(n - 1)}">← DAY ${pad(n - 1)}</a>`
-      : `<span></span>`;
-
-
-  const next =
-    n < TOTAL
-      ? `<a href="#day-${pad(n + 1)}">DAY ${pad(n + 1)} →</a>`
-      : `<span></span>`;
-
-
-  /* 이미지 */
-
-  const imageHTML = d.image
-    ? `
-      <img
-        src="${esc(d.image)}"
-        alt="DAY ${pad(n)} 작업 이미지"
-        loading="lazy">
-    `
-    : `
-      <div class="media-empty">
-        IMAGE
-      </div>
-    `;
-
-
-  /* 영상 */
-
-  const videoHTML =
-    d.videos && d.videos.length
-      ? d.videos.map(embed).join("")
-      : `
-        <div class="media-empty">
-          VIDEO
-        </div>
-      `;
-
-
-  return `
-
-    <div class="dayhead">
-
-      <span class="n">
-        DAY ${pad(n)}
-      </span>
-
-      <span class="t">
-        ${esc(d.title || "")}
-      </span>
-
-      <span class="muted">
-        ${esc(d.date || "")}
-      </span>
-
-    </div>
-
-
-    <div class="day-media">
-
-
-      <!-- 왼쪽 이미지 -->
-
-      <div class="day-media-item">
-
-        <div class="media-title">
-          IMAGE
-        </div>
-
-        <div class="day-image">
-          ${imageHTML}
-        </div>
-
-      </div>
-
-
-      <!-- 오른쪽 영상 -->
-
-      <div class="day-media-item">
-
-        <div class="media-title">
-          VIDEO
-        </div>
-
-        <div class="day-video">
-          ${videoHTML}
-        </div>
-
-      </div>
-
-
-    </div>
-
-
-    <div class="pn">
-      ${prev}
-      ${next}
-    </div>
-
-  `;
-}
-
 
 /* ============================================================
-   현재 DAY 확인
+   CURRENT DAY
    ============================================================ */
+
 
 function currentDay() {
 
   const match =
-    location.hash.match(/^#day-(\d+)/);
+    location.hash.match(
+      /^#day-(\d+)/
+    );
 
 
   if (match) {
@@ -299,73 +262,334 @@ function currentDay() {
 
 
   return latest;
+
 }
 
 
+
 /* ============================================================
-   DAY 다시 그리기
+   DAY PAGE
    ============================================================ */
+
+
+function dayHTML(number) {
+
+  const day =
+    byDay(number) || {
+      day: number,
+      date: "",
+      title: "",
+      image: "",
+      videos: []
+    };
+
+
+
+  /* IMAGE */
+
+
+  let imageHTML;
+
+
+  if (day.image) {
+
+    imageHTML = `
+
+      <img
+        src="${esc(day.image)}"
+        alt="DAY ${pad(number)} 작업 이미지"
+      >
+
+    `;
+
+  }
+
+  else {
+
+    imageHTML = `
+
+      <div class="empty-media">
+
+        <span>IMAGE</span>
+
+        <small>
+          작업 이미지가 아직 없습니다.
+        </small>
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /* VIDEO */
+
+
+  let videoHTML;
+
+
+  if (
+    Array.isArray(day.videos) &&
+    day.videos.length
+  ) {
+
+    videoHTML =
+      day.videos
+        .map(embed)
+        .join("");
+
+  }
+
+  else {
+
+    videoHTML = `
+
+      <div class="empty-media">
+
+        <span>VIDEO</span>
+
+        <small>
+          작업 영상이 아직 없습니다.
+        </small>
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /* PREVIOUS */
+
+
+  const previous = number > 1
+
+    ? `
+
+      <a href="#day-${pad(number - 1)}">
+
+        ← DAY ${pad(number - 1)}
+
+      </a>
+
+    `
+
+    : `<span></span>`;
+
+
+
+  /* NEXT */
+
+
+  const next = number < TOTAL
+
+    ? `
+
+      <a href="#day-${pad(number + 1)}">
+
+        DAY ${pad(number + 1)} →
+
+      </a>
+
+    `
+
+    : `<span></span>`;
+
+
+
+  return `
+
+
+    <div class="dayhead">
+
+
+      <span class="n">
+
+        DAY ${pad(number)}
+
+      </span>
+
+
+      <div class="day-meta">
+
+        <span class="muted">
+
+          ${esc(day.date || "")}
+
+        </span>
+
+
+        <span class="t">
+
+          ${
+            esc(
+              day.title ||
+              "작업 기록 준비 중"
+            )
+          }
+
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+
+    <div class="media-grid">
+
+
+      <!-- IMAGE -->
+
+
+      <div class="media-column">
+
+
+        <div class="media-label">
+
+          IMAGE
+
+        </div>
+
+
+        <div class="image-frame">
+
+          ${imageHTML}
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- VIDEO -->
+
+
+      <div class="media-column">
+
+
+        <div class="media-label">
+
+          VIDEO
+
+        </div>
+
+
+        <div class="video-frame">
+
+          ${videoHTML}
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <div class="pn">
+
+      ${previous}
+
+      ${next}
+
+    </div>
+
+
+  `;
+
+}
+
+
+
+/* ============================================================
+   RENDER DAY
+   ============================================================ */
+
 
 function renderLogs() {
 
-  const n = currentDay();
+  const number =
+    currentDay();
 
-  const body =
+
+  const target =
     $("#logs-body");
 
 
-  if (!body) return;
+  if (!target) {
+    return;
+  }
 
 
-  body.innerHTML =
-    strip(n) +
-    dayHTML(n);
+  target.innerHTML =
+
+    strip(number) +
+
+    dayHTML(number);
+
 }
 
 
+
 /* ============================================================
-   사이트 전체 생성
+   BUILD WEBSITE
    ============================================================ */
+
 
 function build() {
 
-  const S = SITE;
+  const site = SITE;
 
 
-  /* 브라우저 제목 */
+
+  /* Browser title */
+
 
   document.title =
-    `${S.title} | 30 DAYS PROJECT`;
+    `${site.title} | 30 DAYS PROJECT`;
 
 
-  /* 왼쪽 상단 */
+
+  /* Header */
+
 
   $("#brand").textContent =
-    S.title;
+    site.title;
 
-
-  /* 상단 메뉴 */
 
   $("#nav").innerHTML = `
-    <a href="#team">TEAM</a>
-    <a href="#logs">30 DAYS</a>
+
+    <a href="#team">
+      TEAM
+    </a>
+
+    <a href="#logs">
+      30 DAYS
+    </a>
+
   `;
 
 
-  /* 팀원 */
+
+  /* Members */
+
 
   const members =
-    (S.members || [])
-      .map(m => `
+    (site.members || [])
+      .map(name => `
 
         <div class="member">
 
           <h3>
-            ${esc(
-              typeof m === "string"
-                ? m
-                : m.name
-            )}
+            ${esc(name)}
           </h3>
 
         </div>
@@ -374,61 +598,83 @@ function build() {
       .join("");
 
 
-  /* MAIN */
+
+  /* Main */
+
 
   $("#app").innerHTML = `
 
 
-    <!-- ========================================
-         HERO
-         ======================================== -->
+    <!-- HERO -->
+
 
     <div class="wrap hero">
 
-      <p class="project-label">
+
+      <p class="hero-kicker">
+
         30 DAYS PROJECT · 2026
+
       </p>
 
 
       <h1>
-        ${esc(S.title)}
+
+        ${esc(site.title)}
+
       </h1>
 
 
-      <div class="hero-bottom">
+      <div class="hero-info">
 
-        <p>
-          이청하 · 최도준 · 이유민
+
+        <p class="hero-members">
+
+          ${site.members.map(esc).join(" · ")}
+
         </p>
 
 
         <p class="count">
-          ${recorded.length} / ${TOTAL} DAYS
+
+          RECORDED
+
+          ${recorded.length}
+
+          / ${TOTAL}
+
         </p>
+
 
       </div>
 
 
       ${strip(0)}
 
+
     </div>
 
 
 
-    <!-- ========================================
-         CONTENT
-         ======================================== -->
+    <!-- CONTENT -->
+
 
     <div class="wrap">
 
 
       <!-- TEAM -->
 
+
       <section id="team">
 
-        <h2>
-          TEAM
-        </h2>
+
+        <div class="section-heading">
+
+          <h2>
+            TEAM
+          </h2>
+
+        </div>
 
 
         <div class="cols members-grid">
@@ -437,28 +683,35 @@ function build() {
 
         </div>
 
+
       </section>
 
 
 
       <!-- 30 DAYS -->
 
+
       <section id="logs">
 
-        <div class="section-title">
+
+        <div class="section-heading">
+
 
           <h2>
             30 DAYS
           </h2>
 
+
           <span>
             DAILY AI VIDEO ARCHIVE
           </span>
+
 
         </div>
 
 
         <div id="logs-body"></div>
+
 
       </section>
 
@@ -468,35 +721,47 @@ function build() {
   `;
 
 
-  /* FOOTER */
+
+  /* Footer */
+
 
   $("#foot").textContent =
-    `${S.title} · 30 DAYS PROJECT · 2026`;
+
+    `${site.title} · ${site.members.join(" · ")} · 2026`;
+
 
 
   renderLogs();
+
 }
 
 
+
 /* ============================================================
-   DAY 번호 클릭
+   HASH CHANGE
    ============================================================ */
+
 
 window.addEventListener(
   "hashchange",
   () => {
 
-    if (/^#day-/.test(location.hash)) {
+    if (
+      /^#day-/.test(
+        location.hash
+      )
+    ) {
 
       renderLogs();
 
-      const logs =
+
+      const section =
         $("#logs");
 
 
-      if (logs) {
+      if (section) {
 
-        logs.scrollIntoView({
+        section.scrollIntoView({
           behavior: "smooth"
         });
 
@@ -508,29 +773,36 @@ window.addEventListener(
 );
 
 
+
 /* ============================================================
-   BUILD
+   START
    ============================================================ */
+
 
 build();
 
 
-if (/^#day-/.test(location.hash)) {
+if (
+  /^#day-/.test(
+    location.hash
+  )
+) {
 
   setTimeout(
     () => {
 
-      const logs =
+      const section =
         $("#logs");
 
 
-      if (logs) {
+      if (section) {
 
-        logs.scrollIntoView();
+        section.scrollIntoView();
 
       }
 
     },
+
     50
   );
 
