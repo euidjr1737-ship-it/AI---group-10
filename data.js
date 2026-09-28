@@ -9,7 +9,7 @@
 
 const SITE = {
   title: "프로젝트 제목",
-  subtitle: "30 DAYS PROJECT · 팀 이름 · 수업명 · 2026",
+  subtitle: "30 DAYS PROJECT · team 10 · AI기반영상제작워크샵 · 2026",
   logline: "한 문장으로 요약한 로그라인을 여기에 적으세요.",
 
   team: {
