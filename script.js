@@ -1,809 +1,243 @@
-/* ============================================================
-   ADHD · 30 DAYS PROJECT
-   ============================================================ */
+const dayGrid = document.getElementById("day-grid");
+
+const dayNumber = document.getElementById("day-number");
+const dayDate = document.getElementById("day-date");
+const dayTitle = document.getElementById("day-title");
+
+const imageBox = document.getElementById("image-box");
+const videoBox = document.getElementById("video-box");
+
+const currentCount = document.getElementById("current-count");
+
+const imageDayLabel = document.getElementById("image-day-label");
+const videoDayLabel = document.getElementById("video-day-label");
 
 
-const $ = selector =>
-  document.querySelector(selector);
-
-
-const esc = value =>
-  String(value ?? "").replace(
-    /[&<>"']/g,
-    char => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    }[char])
-  );
-
-
-const pad = number =>
-  String(number).padStart(2, "0");
-
-
-const TOTAL = 30;
-
-
-
-/* ============================================================
-   VIDEO EMBED
-
-   YouTube
-   Google Drive
-   MP4
-   ============================================================ */
-
-
-function embed(url) {
-
-  url = String(url || "").trim();
-
-
-  if (!url) {
-    return "";
-  }
-
-
-  /* YouTube */
-
-  let match = url.match(
-    /(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([\w-]{11})/
-  );
-
-
-  if (match) {
-
-    return `
-
-      <div class="video">
-
-        <iframe
-          src="https://www.youtube.com/embed/${match[1]}"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-
-      </div>
-
-    `;
-
-  }
-
-
-
-  /* Google Drive */
-
-  match =
-    url.match(/drive\.google\.com\/file\/d\/([\w-]+)/) ||
-    url.match(/drive\.google\.com\/.*[?&]id=([\w-]+)/);
-
-
-  if (match) {
-
-    return `
-
-      <div class="video">
-
-        <iframe
-          src="https://drive.google.com/file/d/${match[1]}/preview"
-          allow="autoplay"
-          allowfullscreen>
-        </iframe>
-
-      </div>
-
-    `;
-
-  }
-
-
-
-  /* MP4 / WEBM */
-
-  if (/\.(mp4|webm)(\?|$)/i.test(url)) {
-
-    return `
-
-      <div class="video">
-
-        <video
-          src="${esc(url)}"
-          controls>
-        </video>
-
-      </div>
-
-    `;
-
-  }
-
-
-  return "";
-
+function pad(number) {
+  return String(number).padStart(2, "0");
 }
 
 
+function getYoutubeID(url) {
 
-/* ============================================================
-   DAY DATA
-   ============================================================ */
+  if (!url) return null;
 
+  const patterns = [
+    /youtu\.be\/([^?&/]+)/,
+    /youtube\.com\/watch\?.*v=([^?&/]+)/,
+    /youtube\.com\/embed\/([^?&/]+)/,
+    /youtube\.com\/shorts\/([^?&/]+)/
+  ];
 
-function byDay(number) {
+  for (const pattern of patterns) {
 
-  return DAYS.find(
-    item => item.day === number
-  );
+    const match = url.match(pattern);
 
+    if (match) {
+      return match[1];
+    }
+
+  }
+
+  return null;
 }
-
 
 
 function hasContent(day) {
 
-  if (!day) return false;
-
-
   return Boolean(
-
     day.image ||
-
-    (
-      Array.isArray(day.videos) &&
-      day.videos.length
-    )
-
+    day.video ||
+    day.title ||
+    day.date
   );
 
 }
 
 
+function createDayNavigation() {
 
-const recorded = DAYS
-  .filter(hasContent)
-  .map(day => day.day);
+  DAYS.forEach(day => {
 
+    const button = document.createElement("button");
 
+    button.className = "day-button";
 
-const latest = recorded.length
-  ? Math.max(...recorded)
-  : 1;
+    button.textContent = pad(day.day);
 
-
-
-/* ============================================================
-   DAY 01 ~ 30 STRIP
-   ============================================================ */
+    button.dataset.day = day.day;
 
 
-function strip(active) {
-
-  let html = "";
-
-
-  for (
-    let day = 1;
-    day <= TOTAL;
-    day++
-  ) {
-
-    const classes = [
-      "cell",
-
-      recorded.includes(day)
-        ? "has"
-        : "",
-
-      day === active
-        ? "on"
-        : ""
-
-    ]
-      .filter(Boolean)
-      .join(" ");
+    if (hasContent(day)) {
+      button.classList.add("available");
+    }
 
 
-    html += `
+    button.addEventListener("click", () => {
 
-      <a
-        class="${classes}"
-        href="#day-${pad(day)}"
-        aria-label="Day ${pad(day)}">
+      showDay(day.day);
 
-        ${pad(day)}
+      history.replaceState(
+        null,
+        "",
+        `#day-${pad(day.day)}`
+      );
 
-      </a>
+      window.scrollTo({
+        top: document.querySelector(".featured").offsetTop - 70,
+        behavior: "smooth"
+      });
 
-    `;
-
-  }
+    });
 
 
-  return `
+    dayGrid.appendChild(button);
 
-    <div class="strip">
-      ${html}
-    </div>
-
-  `;
+  });
 
 }
 
 
+function showDay(number) {
 
-/* ============================================================
-   CURRENT DAY
-   ============================================================ */
+  const day = DAYS.find(
+    item => item.day === number
+  );
 
-
-function currentDay() {
-
-  const match =
-    location.hash.match(
-      /^#day-(\d+)/
-    );
+  if (!day) return;
 
 
-  if (match) {
+  /* ACTIVE BUTTON */
 
-    return Math.min(
-      TOTAL,
-      Math.max(
-        1,
-        Number(match[1])
-      )
-    );
+  document
+    .querySelectorAll(".day-button")
+    .forEach(button => {
 
-  }
+      button.classList.toggle(
+        "active",
+        Number(button.dataset.day) === number
+      );
 
-
-  return latest;
-
-}
+    });
 
 
+  /* TEXT */
 
-/* ============================================================
-   DAY PAGE
-   ============================================================ */
+  const formatted = pad(number);
+
+  dayNumber.textContent =
+    `DAY ${formatted}`;
+
+  currentCount.textContent =
+    formatted;
+
+  imageDayLabel.textContent =
+    `DAY ${formatted}`;
+
+  videoDayLabel.textContent =
+    `DAY ${formatted}`;
 
 
-function dayHTML(number) {
+  dayDate.textContent =
+    day.date || "COMING SOON";
 
-  const day =
-    byDay(number) || {
-      day: number,
-      date: "",
-      title: "",
-      image: "",
-      videos: []
-    };
-
+  dayTitle.textContent =
+    day.title || "작업 기록 준비 중";
 
 
   /* IMAGE */
 
-
-  let imageHTML;
-
-
   if (day.image) {
 
-    imageHTML = `
-
+    imageBox.innerHTML = `
       <img
-        src="${esc(day.image)}"
-        alt="DAY ${pad(number)} 작업 이미지"
+        src="${day.image}"
+        alt="DAY ${formatted} 작업 이미지"
       >
-
     `;
 
   }
 
   else {
 
-    imageHTML = `
-
-      <div class="empty-media">
-
-        <span>IMAGE</span>
-
-        <small>
-          작업 이미지가 아직 없습니다.
-        </small>
-
+    imageBox.innerHTML = `
+      <div class="empty">
+        <span>${formatted}</span>
+        <p>IMAGE COMING SOON</p>
       </div>
-
     `;
 
   }
-
 
 
   /* VIDEO */
 
+  const youtubeID =
+    getYoutubeID(day.video);
 
-  let videoHTML;
 
+  if (youtubeID) {
 
-  if (
-    Array.isArray(day.videos) &&
-    day.videos.length
-  ) {
-
-    videoHTML =
-      day.videos
-        .map(embed)
-        .join("");
+    videoBox.innerHTML = `
+      <iframe
+        src="https://www.youtube.com/embed/${youtubeID}"
+        title="DAY ${formatted} VIDEO"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    `;
 
   }
 
   else {
 
-    videoHTML = `
-
-      <div class="empty-media">
-
-        <span>VIDEO</span>
-
-        <small>
-          작업 영상이 아직 없습니다.
-        </small>
-
+    videoBox.innerHTML = `
+      <div class="empty dark">
+        <span>${formatted}</span>
+        <p>VIDEO COMING SOON</p>
       </div>
-
     `;
 
   }
 
-
-
-  /* PREVIOUS */
-
-
-  const previous = number > 1
-
-    ? `
-
-      <a href="#day-${pad(number - 1)}">
-
-        ← DAY ${pad(number - 1)}
-
-      </a>
-
-    `
-
-    : `<span></span>`;
-
-
-
-  /* NEXT */
-
-
-  const next = number < TOTAL
-
-    ? `
-
-      <a href="#day-${pad(number + 1)}">
-
-        DAY ${pad(number + 1)} →
-
-      </a>
-
-    `
-
-    : `<span></span>`;
-
-
-
-  return `
-
-
-    <div class="dayhead">
-
-
-      <span class="n">
-
-        DAY ${pad(number)}
-
-      </span>
-
-
-      <div class="day-meta">
-
-        <span class="muted">
-
-          ${esc(day.date || "")}
-
-        </span>
-
-
-        <span class="t">
-
-          ${
-            esc(
-              day.title ||
-              "작업 기록 준비 중"
-            )
-          }
-
-        </span>
-
-      </div>
-
-
-    </div>
-
-
-
-    <div class="media-grid">
-
-
-      <!-- IMAGE -->
-
-
-      <div class="media-column">
-
-
-        <div class="media-label">
-
-          IMAGE
-
-        </div>
-
-
-        <div class="image-frame">
-
-          ${imageHTML}
-
-        </div>
-
-
-      </div>
-
-
-
-      <!-- VIDEO -->
-
-
-      <div class="media-column">
-
-
-        <div class="media-label">
-
-          VIDEO
-
-        </div>
-
-
-        <div class="video-frame">
-
-          ${videoHTML}
-
-        </div>
-
-
-      </div>
-
-
-    </div>
-
-
-
-    <div class="pn">
-
-      ${previous}
-
-      ${next}
-
-    </div>
-
-
-  `;
-
 }
 
 
+function getInitialDay() {
 
-/* ============================================================
-   RENDER DAY
-   ============================================================ */
+  const match =
+    location.hash.match(/day-(\d+)/);
 
+  if (match) {
 
-function renderLogs() {
-
-  const number =
-    currentDay();
-
-
-  const target =
-    $("#logs-body");
-
-
-  if (!target) {
-    return;
-  }
-
-
-  target.innerHTML =
-
-    strip(number) +
-
-    dayHTML(number);
-
-}
-
-
-
-/* ============================================================
-   BUILD WEBSITE
-   ============================================================ */
-
-
-function build() {
-
-  const site = SITE;
-
-
-
-  /* Browser title */
-
-
-  document.title =
-    `${site.title} | 30 DAYS PROJECT`;
-
-
-
-  /* Header */
-
-
-  $("#brand").textContent =
-    site.title;
-
-
-  $("#nav").innerHTML = `
-
-    <a href="#team">
-      TEAM
-    </a>
-
-    <a href="#logs">
-      30 DAYS
-    </a>
-
-  `;
-
-
-
-  /* Members */
-
-
-  const members =
-    (site.members || [])
-      .map(name => `
-
-        <div class="member">
-
-          <h3>
-            ${esc(name)}
-          </h3>
-
-        </div>
-
-      `)
-      .join("");
-
-
-
-  /* Main */
-
-
-  $("#app").innerHTML = `
-
-
-    <!-- HERO -->
-
-
-    <div class="wrap hero">
-
-
-      <p class="hero-kicker">
-
-        30 DAYS PROJECT · 2026
-
-      </p>
-
-
-      <h1>
-
-        ${esc(site.title)}
-
-      </h1>
-
-
-      <div class="hero-info">
-
-
-        <p class="hero-members">
-
-          ${site.members.map(esc).join(" · ")}
-
-        </p>
-
-
-        <p class="count">
-
-          RECORDED
-
-          ${recorded.length}
-
-          / ${TOTAL}
-
-        </p>
-
-
-      </div>
-
-
-      ${strip(0)}
-
-
-    </div>
-
-
-
-    <!-- CONTENT -->
-
-
-    <div class="wrap">
-
-
-      <!-- TEAM -->
-
-
-      <section id="team">
-
-
-        <div class="section-heading">
-
-          <h2>
-            TEAM
-          </h2>
-
-        </div>
-
-
-        <div class="cols members-grid">
-
-          ${members}
-
-        </div>
-
-
-      </section>
-
-
-
-      <!-- 30 DAYS -->
-
-
-      <section id="logs">
-
-
-        <div class="section-heading">
-
-
-          <h2>
-            30 DAYS
-          </h2>
-
-
-          <span>
-            DAILY AI VIDEO ARCHIVE
-          </span>
-
-
-        </div>
-
-
-        <div id="logs-body"></div>
-
-
-      </section>
-
-
-    </div>
-
-  `;
-
-
-
-  /* Footer */
-
-
-  $("#foot").textContent =
-
-    `${site.title} · ${site.members.join(" · ")} · 2026`;
-
-
-
-  renderLogs();
-
-}
-
-
-
-/* ============================================================
-   HASH CHANGE
-   ============================================================ */
-
-
-window.addEventListener(
-  "hashchange",
-  () => {
+    const number =
+      Number(match[1]);
 
     if (
-      /^#day-/.test(
-        location.hash
-      )
+      number >= 1 &&
+      number <= 30
     ) {
-
-      renderLogs();
-
-
-      const section =
-        $("#logs");
-
-
-      if (section) {
-
-        section.scrollIntoView({
-          behavior: "smooth"
-        });
-
-      }
-
+      return number;
     }
 
   }
-);
 
 
-
-/* ============================================================
-   START
-   ============================================================ */
+  const completed =
+    DAYS.filter(hasContent);
 
 
-build();
+  if (completed.length) {
+    return completed[completed.length - 1].day;
+  }
 
 
-if (
-  /^#day-/.test(
-    location.hash
-  )
-) {
-
-  setTimeout(
-    () => {
-
-      const section =
-        $("#logs");
-
-
-      if (section) {
-
-        section.scrollIntoView();
-
-      }
-
-    },
-
-    50
-  );
-
+  return 1;
 }
+
+
+createDayNavigation();
+
+showDay(
+  getInitialDay()
+);
