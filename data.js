@@ -30,22 +30,16 @@ const SITE = {
 
 const DAYS = [
 
-  /* =========================
-     DAY 01
-     ========================= */
-
   {
     day: 1,
 
-    date: "2026-09-28",
+    date: "2026.09.28",
 
     title: "캐릭터 디자인 및 AI 영상 테스트",
 
-    image: "images/day1-character.png",
+    image: "day1-character.png",
 
-    videos: [
-      "https://youtu.be/ehvclCeThqU?si=tW2yPpjOtClHBhgE"
-    ]
+    youtube: "https://youtu.be/ehvclCeThqU?si=tW2yPpjOtClHBhgE"
   }
 
 ];
