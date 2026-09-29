@@ -4,27 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>A DOZEN HEAD DISTRACTIONS</title>
+  <title>A Dozen Head Distractions</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="site-header">
-  <a href="index.html" class="site-logo">
-    A DOZEN HEAD DISTRACTIONS
-  </a>
+<header class="topbar">
+  <a class="brand" href="#top">ADHD</a>
 
-  <nav class="site-nav">
+  <nav>
     <a href="#project">PROJECT</a>
     <a href="#archive">30 DAYS</a>
     <a href="character.html">CHARACTER SHEET ↗</a>
@@ -32,112 +26,170 @@
 </header>
 
 
-<main>
+<main id="top">
 
-  <!-- PROJECT INTRO -->
-  <section class="project-hero" id="project">
+  <!-- =====================================================
+       PROJECT
+       ===================================================== -->
 
-    <div class="hero-title-area">
-      <p class="eyebrow">AI SHORT FILM · DRAMA · ≈ 1 MIN</p>
+  <section class="hero" id="project">
+
+    <div class="hero-left">
+
+      <div class="hero-kicker">
+        AI SHORT FILM · DRAMA · ≈ 1 MIN
+      </div>
 
       <h1>
         A DOZEN HEAD<br>
         DISTRACTIONS
       </h1>
 
-      <div class="adhd-tag">ADHD</div>
+      <div class="hero-tag">
+        ADHD
+      </div>
+
     </div>
 
 
-    <div class="hero-logline">
-      <span class="small-label">LOGLINE</span>
+    <div class="hero-right">
 
-      <p>
+      <div class="logline-mark"></div>
+
+      <div class="section-label">
+        LOGLINE
+      </div>
+
+      <p class="logline">
         끊이지 않는 잡생각과 초조함으로 하루를 망치고 돌아온
         주인공이 자책에 잠겨 있던 밤,
         자신도 몰랐던 면모를 발견한다.
       </p>
-    </div>
 
 
-    <div class="hero-credit">
-      <p>
-        성균관대학교 영상학과<br>
-        AI기반영상워크샵 · 10조
-      </p>
+      <div class="credits">
 
-      <p class="member-names">
-        이청하 · 최도준 · 이유민
-      </p>
+        <div>
+          <span>PROJECT</span>
+          <p>
+            성균관대학교 영상학과<br>
+            AI기반영상워크샵 · 10조
+          </p>
+        </div>
+
+        <div>
+          <span>TEAM</span>
+          <p>
+            이청하 · 최도준 · 이유민
+          </p>
+        </div>
+
+      </div>
+
     </div>
 
   </section>
 
 
-  <!-- 30 DAYS -->
-  <section class="archive-section" id="archive">
 
-    <div class="archive-heading">
+  <!-- =====================================================
+       30 DAYS
+       ===================================================== -->
+
+  <section class="archive" id="archive">
+
+    <div class="archive-title">
+
       <div>
-        <span class="small-label">30 DAYS PROJECT</span>
-        <h2>DAILY FILM ARCHIVE</h2>
+        <span class="section-label">
+          30 DAYS PROJECT
+        </span>
+
+        <h2>
+          DAILY FILM<br>
+          ARCHIVE
+        </h2>
       </div>
 
-      <div id="archive-status"></div>
+      <div id="current-status"></div>
+
     </div>
 
 
-    <!-- 선택한 DAY 영상 -->
-    <div id="day-main"></div>
+    <!-- 현재 선택된 DAY -->
+    <div id="current-day"></div>
 
 
-    <!-- DAY 01 ~ 30 -->
-    <div class="day-selector-wrap">
+    <!-- 날짜 선택 -->
+    <div class="days-area">
 
-      <div class="selector-heading">
-        <span>SELECT DAY</span>
+      <div class="days-heading">
 
-        <span class="uploaded-key">
+        <span>
+          SELECT DAY
+        </span>
+
+        <span class="uploaded-legend">
           <i></i>
           UPLOADED
         </span>
+
       </div>
 
-      <div id="day-selector" class="day-selector"></div>
+      <div
+        class="days-grid"
+        id="days-grid"
+      ></div>
 
     </div>
 
   </section>
 
 
-  <!-- CHARACTER ENTRY -->
+
+  <!-- =====================================================
+       CHARACTER SHEET ENTRY
+       ===================================================== -->
+
   <section class="character-entry">
 
-    <div class="character-entry-number">
-      CHARACTER<br>
-      ARCHIVE
+    <div class="character-bg-word">
+      CHARACTER
     </div>
 
-    <div class="character-entry-copy">
 
-      <span class="small-label">
-        CHARACTER SHEET
-      </span>
+    <div class="character-entry-inner">
 
-      <h2>
-        MEET THE<br>
-        CHARACTERS
-      </h2>
+      <div>
 
-      <p>
-        A Dozen Head Distractions의 캐릭터 디자인,
-        표정과 디테일을 확인할 수 있습니다.
-      </p>
+        <span class="section-label">
+          CHARACTER ARCHIVE
+        </span>
 
-      <a href="character.html" class="detail-link">
-        EXPLORE CHARACTER SHEET
-        <span>↗</span>
-      </a>
+        <h2>
+          CHARACTER<br>
+          SHEET
+        </h2>
+
+      </div>
+
+
+      <div class="character-entry-text">
+
+        <p>
+          A Dozen Head Distractions의 캐릭터 디자인과
+          표정, 의상, 형태를 정리한 비주얼 아카이브.
+        </p>
+
+        <a
+          class="arrow-link"
+          href="character.html"
+        >
+          EXPLORE CHARACTER SHEET
+          <b>↗</b>
+        </a>
+
+      </div>
 
     </div>
 
@@ -146,33 +198,51 @@
 </main>
 
 
+
 <footer>
-  <div>A DOZEN HEAD DISTRACTIONS</div>
+
+  <div>
+    A DOZEN HEAD DISTRACTIONS
+  </div>
 
   <div>
     SKKU · AI-BASED VIDEO WORKSHOP · TEAM 10 · 2026
   </div>
+
 </footer>
 
 
-<!-- DAY DETAIL MODAL -->
-<div id="detail-modal" class="modal" aria-hidden="true">
 
-  <div class="modal-backdrop" data-close-modal></div>
+<!-- =====================================================
+     VIEW DETAILS
+     ===================================================== -->
 
-  <div class="modal-panel">
+<div
+  class="detail-overlay"
+  id="detail-overlay"
+  aria-hidden="true"
+>
+
+  <div
+    class="detail-background"
+    data-close
+  ></div>
+
+
+  <aside class="detail-panel">
 
     <button
-      class="modal-close"
-      data-close-modal
-      aria-label="Close"
+      class="detail-close"
+      data-close
+      aria-label="close"
     >
       ×
     </button>
 
+
     <div id="detail-content"></div>
 
-  </div>
+  </aside>
 
 </div>
 
