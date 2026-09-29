@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>TEAM 10 — 30 DAYS PROJECT</title>
 
-  <!-- Korean / English typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -15,28 +14,25 @@
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
-  <!-- ======================================================
-       HEADER
-  ======================================================= -->
+  <div class="page-noise"></div>
 
+  <!-- HEADER -->
   <header class="site-header">
 
     <a href="./index.html" class="brand">
-      <span class="brand-title">TEAM 10</span>
-      <span class="brand-sub">
-        성균관대학교 영상학과 · AI기반영상제작워크샵
-      </span>
+      <strong>TEAM 10</strong>
+      <span>성균관대학교 영상학과 · AI기반영상제작워크샵</span>
     </a>
 
     <nav class="main-nav">
       <a href="#project">PROJECT</a>
       <a href="#archive">30 DAYS</a>
-      <a href="./character.html">CHARACTER SHEET ↗</a>
+      <a href="./character.html">CHARACTER SHEET <span>↗</span></a>
     </nav>
 
   </header>
@@ -44,38 +40,45 @@
 
   <main>
 
-    <!-- ======================================================
-         PROJECT INTRO
-    ======================================================= -->
+    <!-- ==================================================
+         PROJECT
+    =================================================== -->
 
-    <section class="project-intro" id="project">
+    <section class="project-section" id="project">
 
-      <div class="intro-label">
-        30 DAYS PROJECT · 2026
+      <div class="project-kicker">
+        <span>30 DAYS PROJECT</span>
+        <span class="kicker-line"></span>
+        <span>2026</span>
       </div>
 
-      <div class="intro-grid">
 
-        <div class="intro-title-wrap">
+      <div class="project-layout">
 
-          <h1 class="project-title">
+        <!-- LEFT -->
+        <div class="project-title-area">
+
+          <h1>
             A DOZEN<br>
             HEAD<br>
             DISTRACTIONS
           </h1>
 
-          <span class="working-title">(가제)</span>
+          <div class="clay-mark clay-mark-one"></div>
+          <div class="clay-mark clay-mark-two"></div>
 
         </div>
 
 
-        <div class="project-info">
+        <!-- RIGHT -->
+        <div class="project-copy">
 
-          <div class="info-block">
-            <span class="info-number">01</span>
+          <article class="project-copy-block">
+
+            <span class="copy-index">01</span>
 
             <div>
-              <span class="info-label">LOGLINE</span>
+              <span class="copy-title">LOGLINE</span>
 
               <p>
                 끊이지 않는 잡생각과 초조함으로 하루를 망치고 돌아온
@@ -83,14 +86,16 @@
                 면모를 발견한다.
               </p>
             </div>
-          </div>
+
+          </article>
 
 
-          <div class="info-block">
-            <span class="info-number">02</span>
+          <article class="project-copy-block">
+
+            <span class="copy-index">02</span>
 
             <div>
-              <span class="info-label">CONCEPT</span>
+              <span class="copy-title">CONCEPT</span>
 
               <p>
                 ADHD를 단순한 결함이나 산만함으로 바라보기보다,
@@ -98,7 +103,8 @@
                 가능성을 클레이 스타일의 AI 영상으로 표현한다.
               </p>
             </div>
-          </div>
+
+          </article>
 
 
           <div class="project-meta">
@@ -110,7 +116,7 @@
 
             <div>
               <span>TEAM</span>
-              <strong>이청하 · 최도준 · 이유민</strong>
+              <strong>TEAM 10</strong>
             </div>
 
           </div>
@@ -122,157 +128,169 @@
     </section>
 
 
+    <!-- TRANSITION -->
 
-    <!-- ======================================================
+    <div class="archive-transition">
+
+      <div class="transition-line"></div>
+
+      <div class="transition-center">
+        <span>DAILY ARCHIVE</span>
+        <strong id="transitionProgress">02 / 30</strong>
+        <span class="down-arrow">↓</span>
+      </div>
+
+      <div class="transition-line"></div>
+
+    </div>
+
+
+
+    <!-- ==================================================
          DAILY ARCHIVE
-    ======================================================= -->
+    =================================================== -->
 
-    <section class="archive" id="archive">
+    <section class="archive-section" id="archive">
 
-      <div class="section-heading">
+      <div class="archive-head">
 
         <div>
-          <span class="section-kicker">DAILY ARCHIVE</span>
-          <h2>30 DAYS</h2>
+          <span class="archive-eyebrow">CURRENT ARCHIVE</span>
+          <h2 id="archiveDay">DAY 02</h2>
         </div>
 
-        <div class="archive-progress">
-          <span id="completedCount">01</span>
-          <span class="progress-divider">/</span>
-          <span>30</span>
+        <div class="archive-status">
+
+          <span class="status-stamp" id="statusStamp">
+            <i></i>
+            UPDATED
+          </span>
+
+          <span id="archiveDate">
+            2026.09.29
+          </span>
+
         </div>
 
       </div>
 
 
-      <!-- CURRENT DAY -->
+      <!-- VIDEO -->
 
-      <article class="day-feature">
+      <div class="video-stage">
 
-        <div class="day-topline">
+        <div class="video-decoration decoration-a"></div>
+        <div class="video-decoration decoration-b"></div>
 
-          <div class="day-heading">
-            <span class="day-number" id="dayNumber">DAY 01</span>
-
-            <span class="uploaded-badge" id="uploadedBadge">
-              <span class="badge-dot"></span>
-              UPDATED
-            </span>
-          </div>
-
-          <time id="dayDate">
-            2026.09.28
-          </time>
-
+        <div class="video-shell">
+          <div id="videoContainer" class="video-container"></div>
         </div>
 
-
-        <!-- VIDEO -->
-
-        <div class="video-shell" id="videoShell">
-
-          <div class="video-frame" id="videoContainer">
-
-            <div class="video-placeholder">
-              <span>DAY 01</span>
-              <p>VIDEO ARCHIVE</p>
-            </div>
-
-          </div>
-
-        </div>
+      </div>
 
 
-        <!-- DAY INFORMATION / DETAILS CTA -->
+      <!-- VIDEO INFO -->
 
-        <div class="day-bottom">
+      <div class="archive-info">
 
-          <div class="day-summary">
+        <div class="archive-info-left">
 
-            <span class="day-summary-label">
-              TODAY'S ARCHIVE
-            </span>
-
-            <h3 id="dayTitle">
-              First Motion Test
-            </h3>
-
-          </div>
-
-
-          <button
-            class="details-button"
-            id="detailsButton"
-            type="button"
-          >
-            <span class="details-small">
-              PROCESS ARCHIVE
-            </span>
-
-            <span class="details-main">
-              VIEW DETAILS
-              <span class="details-arrow">↗</span>
-            </span>
-          </button>
-
-        </div>
-
-
-        <!-- DAY SELECTOR -->
-
-        <div class="day-selector-wrap">
-
-          <span class="selector-title">
-            SELECT DAY
+          <span class="archive-small">
+            SELECTED ARCHIVE
           </span>
 
-          <div class="day-selector" id="daySelector">
-          </div>
+          <strong id="archiveTitle">
+            DAY 02
+          </strong>
 
         </div>
 
-      </article>
+
+        <button
+          type="button"
+          class="view-details"
+          id="viewDetails"
+        >
+
+          <span class="details-label">
+            MORE INFORMATION
+          </span>
+
+          <span class="details-text">
+            VIEW DETAILS
+            <b>↗</b>
+          </span>
+
+        </button>
+
+      </div>
+
+
+
+      <!-- DAY SELECTOR -->
+
+      <div class="day-navigation">
+
+        <div class="day-navigation-head">
+
+          <span>30 DAYS</span>
+
+          <span>
+            <strong id="completedDays">02</strong>
+            / 30 UPDATED
+          </span>
+
+        </div>
+
+
+        <div class="day-grid" id="dayGrid"></div>
+
+      </div>
 
     </section>
 
 
 
-    <!-- ======================================================
-         CHARACTER CTA
-    ======================================================= -->
+    <!-- ==================================================
+         CHARACTER SHEET CTA
+    =================================================== -->
 
-    <section class="character-entry">
+    <section class="character-preview">
 
-      <a
-        href="./character.html"
-        class="character-card"
-      >
+      <a href="./character.html" class="character-preview-card">
 
-        <div class="character-left">
+        <div class="character-preview-top">
 
-          <span class="character-index">
-            CHARACTER ARCHIVE
-          </span>
+          <span>VISUAL ARCHIVE</span>
 
-          <h2>
-            CHARACTER<br>
-            SHEET
-          </h2>
+          <span>01 — 07</span>
 
         </div>
 
 
-        <div class="character-right">
+        <div class="character-preview-content">
 
-          <p>
-            프로젝트의 캐릭터 디자인과 시각적 설정을
-            한곳에서 확인할 수 있습니다.
-          </p>
+          <div>
+            <h2>
+              CHARACTER<br>
+              SHEET
+            </h2>
+          </div>
 
-          <span class="character-link">
-            OPEN ARCHIVE
-            <span>↗</span>
-          </span>
+
+          <div class="character-preview-copy">
+
+            <p>
+              캐릭터의 형태, 표정, 의상과 시각적 설정을
+              정리한 별도의 비주얼 아카이브입니다.
+            </p>
+
+            <span class="open-character">
+              OPEN CHARACTER ARCHIVE
+              <b>↗</b>
+            </span>
+
+          </div>
 
         </div>
 
@@ -284,114 +302,110 @@
 
 
 
-  <!-- ======================================================
-       DETAILS PANEL
-  ======================================================= -->
+  <!-- ==================================================
+       DETAIL OVERLAY
+  =================================================== -->
 
   <div
-    class="details-overlay"
-    id="detailsOverlay"
+    class="detail-overlay"
+    id="detailOverlay"
     aria-hidden="true"
   >
 
-    <div class="details-panel">
+    <div class="detail-page">
 
-      <div class="details-header">
+      <header class="detail-header">
 
         <div>
 
-          <span class="detail-day" id="detailDay">
-            DAY 01
+          <span class="detail-kicker">
+            PROCESS ARCHIVE
           </span>
 
-          <h2 id="detailTitle">
-            First Motion Test
+          <h2 id="detailDay">
+            DAY 02
           </h2>
+
+          <span class="detail-date" id="detailDate">
+            2026.09.29
+          </span>
 
         </div>
 
 
         <button
-          class="close-button"
-          id="closeDetails"
           type="button"
-          aria-label="Close"
+          class="detail-close"
+          id="detailClose"
+          aria-label="close"
         >
           ×
         </button>
 
-      </div>
+      </header>
 
 
 
-      <div class="detail-content">
+      <div class="detail-sections">
 
-
-        <!-- DESCRIPTION -->
+        <!-- 01 -->
 
         <section class="detail-section">
 
-          <div class="detail-number">
-            01
-          </div>
+          <span class="detail-number">01</span>
 
-          <div class="detail-body">
+          <div class="detail-copy">
 
             <span class="detail-label">
               DESCRIPTION
             </span>
 
-            <p id="detailDescription">
-            </p>
+            <p id="detailDescription"></p>
 
           </div>
 
         </section>
 
 
-
-        <!-- PROMPT -->
+        <!-- 02 -->
 
         <section class="detail-section">
 
-          <div class="detail-number">
-            02
-          </div>
+          <span class="detail-number">02</span>
 
-          <div class="detail-body">
+          <div class="detail-copy">
 
             <span class="detail-label">
               PROMPT
             </span>
 
-            <p id="detailPrompt">
-            </p>
+            <p id="detailPrompt"></p>
 
 
             <a
-              href="./day1-prompt.pdf"
+              href="#"
               target="_blank"
               class="prompt-file"
               id="promptFile"
             >
 
-              <span class="file-icon">
+              <div class="pdf-mark">
                 PDF
-              </span>
+              </div>
 
-              <span class="file-info">
+              <div class="prompt-file-copy">
+
                 <strong>
                   VIEW PROMPT FILE
                 </strong>
 
-                <small>
-                  DAY 01 · PDF DOCUMENT
-                </small>
-              </span>
+                <span id="promptFileName">
+                  PROMPT DOCUMENT
+                </span>
 
-              <span class="file-arrow">
-                ↗
-              </span>
+              </div>
+
+              <b>↗</b>
 
             </a>
 
@@ -400,46 +414,39 @@
         </section>
 
 
-
-        <!-- NOTE -->
+        <!-- 03 -->
 
         <section class="detail-section">
 
-          <div class="detail-number">
-            03
-          </div>
+          <span class="detail-number">03</span>
 
-          <div class="detail-body">
+          <div class="detail-copy">
 
             <span class="detail-label">
               NOTE
             </span>
 
-            <p id="detailNote">
-            </p>
+            <p id="detailNote"></p>
 
           </div>
 
         </section>
 
-
       </div>
 
 
-      <div class="detail-footer">
+      <div class="detail-navigation">
 
         <button
-          class="detail-prev"
-          id="detailPrev"
           type="button"
+          id="previousDay"
         >
           ← PREVIOUS DAY
         </button>
 
         <button
-          class="detail-next"
-          id="detailNext"
           type="button"
+          id="nextDay"
         >
           NEXT DAY →
         </button>
@@ -452,9 +459,7 @@
 
 
 
-  <!-- ======================================================
-       FOOTER
-  ======================================================= -->
+  <!-- FOOTER -->
 
   <footer class="site-footer">
 
@@ -465,9 +470,9 @@
       </span>
     </div>
 
-    <div class="footer-year">
+    <span>
       30 DAYS PROJECT · 2026
-    </div>
+    </span>
 
   </footer>
 
