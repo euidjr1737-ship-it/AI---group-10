@@ -11,25 +11,12 @@ const DAYS = [
 
     title: "캐릭터 디자인 및 AI 영상 테스트",
 
-
-    /* 사진 파일명
-       GitHub에서 index.html과 같은 위치에
-       day1-character.png 파일을 올리면 됩니다.
-    */
-
     image: "day1-character.png",
-
-
-    /* YouTube 링크 */
 
     video: "https://youtu.be/ehvclCeThqU?si=tW2yPpjOtClHBhgE",
 
-
-    /* 상세정보 */
-
     description:
       "ADHD 프로젝트의 메인 캐릭터를 설정하고, 캐릭터의 이미지와 움직임을 활용한 첫 AI 영상 생성 테스트를 진행했다.",
-
 
     prompt:
 `여기에 DAY 01에서 실제 사용한 프롬프트를 입력하세요.
@@ -39,11 +26,9 @@ A cinematic character standing alone in a dimly lit room.
 The character looks distracted as multiple objects move around him.
 Soft cinematic lighting, realistic texture, subtle camera movement.`,
 
-
     note:
       "캐릭터의 전체적인 이미지와 분위기를 테스트했다. 이후 작업에서는 장면이 바뀌어도 동일한 캐릭터의 외형과 스타일이 유지되도록 수정할 예정이다."
   },
-
 
 
   /* =========================================
@@ -52,27 +37,15 @@ Soft cinematic lighting, realistic texture, subtle camera movement.`,
 
   {
     day: 2,
-
     date: "",
-
     title: "",
-
     image: "",
-
     video: "",
-
     description: "",
-
     prompt: "",
-
     note: ""
   },
 
-
-
-  /* =========================================
-     DAY 03
-     ========================================= */
 
   {
     day: 3,
