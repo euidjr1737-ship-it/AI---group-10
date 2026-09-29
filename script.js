@@ -1,284 +1,243 @@
-const $ = (selector) =>
-  document.querySelector(selector);
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const daySelector =
+  document.getElementById("daySelector");
+
+const dayNumber =
+  document.getElementById("dayNumber");
+
+const dayDate =
+  document.getElementById("dayDate");
+
+const dayTitle =
+  document.getElementById("dayTitle");
+
+const uploadedBadge =
+  document.getElementById("uploadedBadge");
+
+const videoContainer =
+  document.getElementById("videoContainer");
+
+const completedCount =
+  document.getElementById("completedCount");
 
 
-const pad = (number) =>
-  String(number).padStart(2, "0");
+const detailsButton =
+  document.getElementById("detailsButton");
+
+const detailsOverlay =
+  document.getElementById("detailsOverlay");
+
+const closeDetails =
+  document.getElementById("closeDetails");
 
 
-function escapeHTML(value) {
+const detailDay =
+  document.getElementById("detailDay");
 
-  return String(value ?? "").replace(
-    /[&<>"']/g,
-    character => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    }[character])
-  );
+const detailTitle =
+  document.getElementById("detailTitle");
+
+const detailDescription =
+  document.getElementById("detailDescription");
+
+const detailPrompt =
+  document.getElementById("detailPrompt");
+
+const detailNote =
+  document.getElementById("detailNote");
+
+const promptFile =
+  document.getElementById("promptFile");
+
+
+const detailPrev =
+  document.getElementById("detailPrev");
+
+const detailNext =
+  document.getElementById("detailNext");
+
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentDay = 1;
+
+
+
+/* =========================================================
+   DAY SELECTOR
+========================================================= */
+
+function buildDaySelector() {
+
+  daySelector.innerHTML = "";
+
+  projectDays.forEach(item => {
+
+    const button =
+      document.createElement("button");
+
+    button.className = "day-button";
+
+    button.textContent =
+      String(item.day).padStart(2, "0");
+
+    if (item.uploaded) {
+      button.classList.add("available");
+    }
+
+    if (item.day === currentDay) {
+      button.classList.add("active");
+    }
+
+    button.addEventListener("click", () => {
+
+      currentDay = item.day;
+
+      renderDay(currentDay);
+
+    });
+
+    daySelector.appendChild(button);
+
+  });
 
 }
 
 
-function textWithBreaks(value) {
 
-  return escapeHTML(value)
-    .replace(/\n/g, "<br>");
+/* =========================================================
+   RENDER CURRENT DAY
+========================================================= */
 
-}
+function renderDay(day) {
 
+  const data =
+    projectDays.find(item => item.day === day);
 
-
-function getDay(number) {
-
-  return DAYS.find(
-    item => item.day === number
-  ) || {
-
-    day: number,
-
-    date: "",
-
-    video: "",
-
-    shortDescription: "",
-
-    description: "",
-
-    prompt: "",
-
-    promptImage: "",
-
-    promptFile: "",
-
-    note: ""
-
-  };
-
-}
+  if (!data) return;
 
 
+  /* HEADER */
 
-function uploaded(day) {
-
-  return Boolean(
-    String(day.video || "").trim()
-  );
-
-}
+  dayNumber.textContent =
+    `DAY ${String(data.day).padStart(2, "0")}`;
 
 
-
-function youtubeID(url) {
-
-  if (!url) return null;
+  dayDate.textContent =
+    data.date || "—";
 
 
-  const match =
-    String(url).match(
-      /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/
-    );
+  dayTitle.textContent =
+    data.uploaded
+      ? data.title
+      : `DAY ${String(data.day).padStart(2, "0")}`;
 
 
-  return match
-    ? match[1]
-    : null;
+  /* UPLOADED */
 
-}
-
-
-
-function videoHTML(url) {
-
-  const id =
-    youtubeID(url);
+  uploadedBadge.style.display =
+    data.uploaded
+      ? "inline-flex"
+      : "none";
 
 
-  if (!id) {
+  /* VIDEO */
 
-    return `
+  renderVideo(data);
 
-      <div class="empty-video">
 
-        <div>
+  /* DETAIL BUTTON */
 
-          <span>
-            NO VIDEO
-          </span>
+  if (data.uploaded) {
 
-          <p>
-            VIDEO NOT UPLOADED YET
-          </p>
+    detailsButton.disabled = false;
 
-        </div>
+    detailsButton.style.opacity = "1";
 
-      </div>
+    detailsButton.style.cursor = "pointer";
 
-    `;
+  } else {
+
+    detailsButton.disabled = true;
+
+    detailsButton.style.opacity = "0.35";
+
+    detailsButton.style.cursor = "default";
 
   }
 
 
-  return `
-
-    <div class="video-frame">
-
-      <iframe
-        src="https://www.youtube.com/embed/${id}"
-        title="Day video"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
-
-    </div>
-
-  `;
-
-}
-
-
-
-function hasDetails(day) {
-
-  return Boolean(
-
-    day.description ||
-
-    day.prompt ||
-
-    day.promptImage ||
-
-    day.promptFile ||
-
-    day.note
-
-  );
-
-}
-
-
-
-function renderDays(activeDay) {
-
-  let html = "";
-
-
-  for (
-    let number = 1;
-    number <= TOTAL_DAYS;
-    number++
-  ) {
-
-    const day =
-      getDay(number);
-
-
-    const isUploaded =
-      uploaded(day);
-
-
-    html += `
-
-      <button
-        class="
-          day-select
-          ${number === activeDay ? "selected" : ""}
-          ${isUploaded ? "has-upload" : ""}
-        "
-        data-select-day="${number}"
-        aria-label="Day ${pad(number)}"
-      >
-
-        <span>
-          ${pad(number)}
-        </span>
-
-        ${
-          isUploaded
-            ? `<i class="day-dot"></i>`
-            : ""
-        }
-
-      </button>
-
-    `;
-
-  }
-
-
-  $("#days-grid").innerHTML =
-    html;
-
+  /* SELECTOR */
 
   document
-    .querySelectorAll("[data-select-day]")
-    .forEach(button => {
+    .querySelectorAll(".day-button")
+    .forEach((button, index) => {
 
-      button.addEventListener(
-        "click",
-        () => {
-
-          const number =
-            Number(
-              button.dataset.selectDay
-            );
-
-
-          renderDay(number);
-
-
-          history.replaceState(
-            null,
-            "",
-            `#day-${pad(number)}`
-          );
-
-
-          document
-            .querySelector("#archive")
-            .scrollIntoView({
-              behavior: "smooth",
-              block: "start"
-            });
-
-        }
+      button.classList.toggle(
+        "active",
+        index + 1 === day
       );
 
     });
 
+
+  updateDetails(data);
+
 }
 
 
 
-function renderStatus(day) {
+/* =========================================================
+   VIDEO
+========================================================= */
 
-  if (uploaded(day)) {
+function renderVideo(data) {
 
-    $("#current-status").innerHTML = `
+  if (
+    data.uploaded &&
+    data.youtubeId
+  ) {
 
-      <div class="upload-status">
+    videoContainer.innerHTML = `
+      <iframe
+        src="https://www.youtube.com/embed/${data.youtubeId}"
+        title="DAY ${String(data.day).padStart(2, "0")} VIDEO"
+        allow="
+          accelerometer;
+          autoplay;
+          clipboard-write;
+          encrypted-media;
+          gyroscope;
+          picture-in-picture;
+          web-share
+        "
+        allowfullscreen>
+      </iframe>
+    `;
 
-        <i></i>
+  } else {
+
+    videoContainer.innerHTML = `
+
+      <div class="video-placeholder">
 
         <span>
-          UPLOADED
+          DAY ${String(data.day).padStart(2, "0")}
         </span>
 
-      </div>
-
-    `;
-
-  }
-
-  else {
-
-    $("#current-status").innerHTML = `
-
-      <div class="not-uploaded">
-
-        NOT UPLOADED
+        <p>
+          ${
+            data.uploaded
+              ? "VIDEO COMING SOON"
+              : "NO ARCHIVE YET"
+          }
+        </p>
 
       </div>
 
@@ -290,489 +249,154 @@ function renderStatus(day) {
 
 
 
-function renderDay(number) {
+/* =========================================================
+   DETAILS
+========================================================= */
 
-  const day =
-    getDay(number);
+function updateDetails(data) {
 
-
-  renderStatus(day);
-
-
-  $("#current-day").innerHTML = `
-
-    <article class="day-feature">
+  detailDay.textContent =
+    `DAY ${String(data.day).padStart(2, "0")}`;
 
 
-      <div class="day-side">
-
-        <div class="big-day-number">
-
-          ${pad(number)}
-
-        </div>
+  detailTitle.textContent =
+    data.title || `Day ${data.day}`;
 
 
-        <div class="day-small-label">
-
-          DAY ${pad(number)}
-
-        </div>
+  detailDescription.textContent =
+    data.description ||
+    "아직 기록이 없습니다.";
 
 
-        <div class="day-date">
-
-          ${
-            day.date
-              ? escapeHTML(day.date)
-              : "—"
-          }
-
-        </div>
-
-      </div>
+  detailPrompt.textContent =
+    data.prompt ||
+    "아직 기록이 없습니다.";
 
 
-
-      <div class="day-main">
-
-
-        <div class="video-label">
-
-          <span>
-            FILM
-          </span>
-
-          <span>
-            ${uploaded(day) ? "PLAY" : "WAITING"}
-          </span>
-
-        </div>
+  detailNote.textContent =
+    data.note ||
+    "아직 기록이 없습니다.";
 
 
-        ${videoHTML(day.video)}
+  /* PROMPT FILE */
+
+  if (data.promptFile) {
+
+    promptFile.style.display = "grid";
+
+    promptFile.href =
+      data.promptFile;
+
+  } else {
+
+    promptFile.style.display = "none";
+
+  }
 
 
+  /* PREVIOUS */
 
-        <div class="day-info">
-
-
-          <div class="day-summary">
-
-            ${
-              day.shortDescription
-
-                ? `
-                  <p>
-                    ${textWithBreaks(
-                      day.shortDescription
-                    )}
-                  </p>
-                `
-
-                : `
-                  <p class="muted">
-                    아직 기록이 없습니다.
-                  </p>
-                `
-            }
-
-          </div>
+  detailPrev.disabled =
+    data.day <= 1;
 
 
-
-          <div>
-
-            ${
-              hasDetails(day)
-
-                ? `
-                  <button
-                    class="arrow-link detail-trigger"
-                    data-detail="${number}"
-                  >
-                    VIEW DETAILS
-                    <b>↗</b>
-                  </button>
-                `
-
-                : `
-                  <span class="coming">
-                    DETAILS COMING SOON
-                  </span>
-                `
-            }
-
-          </div>
+  detailPrev.style.opacity =
+    data.day <= 1
+      ? "0.25"
+      : "1";
 
 
-        </div>
+  /* NEXT */
 
-
-      </div>
-
-
-    </article>
-
-  `;
-
-
-  renderDays(number);
-
-
-  const trigger =
-    document.querySelector(
-      "[data-detail]"
+  const next =
+    projectDays.find(
+      item =>
+        item.day === data.day + 1 &&
+        item.uploaded
     );
 
 
-  if (trigger) {
+  detailNext.disabled =
+    !next;
 
-    trigger.addEventListener(
-      "click",
-      () => {
 
-        openDetails(
-          Number(
-            trigger.dataset.detail
-          )
-        );
+  detailNext.style.opacity =
+    next
+      ? "1"
+      : "0.25";
 
-      }
+}
+
+
+
+/* =========================================================
+   OPEN DETAILS
+========================================================= */
+
+detailsButton.addEventListener(
+  "click",
+  () => {
+
+    const data =
+      projectDays.find(
+        item => item.day === currentDay
+      );
+
+    if (!data || !data.uploaded) {
+      return;
+    }
+
+    updateDetails(data);
+
+    detailsOverlay.classList.add("open");
+
+    detailsOverlay.setAttribute(
+      "aria-hidden",
+      "false"
     );
 
-  }
-
-}
-
-
-
-function promptHTML(day) {
-
-  let output = "";
-
-
-  if (day.prompt) {
-
-    output += `
-
-      <pre class="prompt-box">${escapeHTML(
-        day.prompt
-      )}</pre>
-
-    `;
+    document.body.style.overflow =
+      "hidden";
 
   }
+);
 
 
 
-  if (day.promptImage) {
+/* =========================================================
+   CLOSE DETAILS
+========================================================= */
 
-    output += `
+function closePanel() {
 
-      <div class="prompt-reference">
+  detailsOverlay.classList.remove("open");
 
-        <div class="prompt-reference-label">
-
-          PROMPT REFERENCE
-
-        </div>
-
-        <img
-          src="${escapeHTML(day.promptImage)}"
-          alt="Day ${pad(day.day)} prompt reference"
-        >
-
-      </div>
-
-    `;
-
-  }
-
-
-
-  if (day.promptFile) {
-
-    output += `
-
-      <a
-        class="prompt-file"
-        href="${escapeHTML(day.promptFile)}"
-        target="_blank"
-        rel="noopener"
-      >
-
-        <div>
-
-          <span>
-            PROMPT DOCUMENT
-          </span>
-
-          <small>
-            DAY ${pad(day.day)} · FILE
-          </small>
-
-        </div>
-
-
-        <strong>
-          VIEW FILE ↗
-        </strong>
-
-      </a>
-
-    `;
-
-  }
-
-
-
-  if (!output) {
-
-    output = `
-
-      <p class="detail-empty">
-        No prompt archive yet.
-      </p>
-
-    `;
-
-  }
-
-
-  return output;
-
-}
-
-
-
-function openDetails(number) {
-
-  const day =
-    getDay(number);
-
-
-  $("#detail-content").innerHTML = `
-
-
-    <header class="detail-head">
-
-
-      <div class="detail-eyebrow">
-
-        DAY ${pad(number)}
-
-      </div>
-
-
-      <h2>
-
-        PROCESS<br>
-        ARCHIVE
-
-      </h2>
-
-
-      <div class="detail-head-bottom">
-
-        <span>
-          ${
-            day.date
-              ? escapeHTML(day.date)
-              : ""
-          }
-        </span>
-
-        <span>
-          A DOZEN HEAD DISTRACTIONS
-        </span>
-
-      </div>
-
-
-    </header>
-
-
-
-    <!-- 01 DESCRIPTION -->
-
-    <section class="detail-section">
-
-
-      <div class="detail-number">
-
-        01
-
-      </div>
-
-
-      <div class="detail-body">
-
-
-        <h3>
-          DESCRIPTION
-        </h3>
-
-
-        ${
-          day.description
-
-            ? `
-              <p>
-                ${textWithBreaks(
-                  day.description
-                )}
-              </p>
-            `
-
-            : `
-              <p class="detail-empty">
-                No description yet.
-              </p>
-            `
-        }
-
-
-      </div>
-
-
-    </section>
-
-
-
-    <!-- 02 PROMPT -->
-
-    <section class="detail-section">
-
-
-      <div class="detail-number">
-
-        02
-
-      </div>
-
-
-      <div class="detail-body">
-
-
-        <h3>
-          PROMPT
-        </h3>
-
-
-        ${promptHTML(day)}
-
-
-      </div>
-
-
-    </section>
-
-
-
-    <!-- 03 NOTE -->
-
-    <section class="detail-section">
-
-
-      <div class="detail-number">
-
-        03
-
-      </div>
-
-
-      <div class="detail-body">
-
-
-        <h3>
-          NOTE
-        </h3>
-
-
-        ${
-          day.note
-
-            ? `
-              <p>
-                ${textWithBreaks(
-                  day.note
-                )}
-              </p>
-            `
-
-            : `
-              <p class="detail-empty">
-                No note yet.
-              </p>
-            `
-        }
-
-
-      </div>
-
-
-    </section>
-
-
-  `;
-
-
-  const overlay =
-    $("#detail-overlay");
-
-
-  overlay.classList.add("open");
-
-
-  overlay.setAttribute(
-    "aria-hidden",
-    "false"
-  );
-
-
-  document.body.classList.add(
-    "no-scroll"
-  );
-
-}
-
-
-
-function closeDetails() {
-
-  const overlay =
-    $("#detail-overlay");
-
-
-  overlay.classList.remove("open");
-
-
-  overlay.setAttribute(
+  detailsOverlay.setAttribute(
     "aria-hidden",
     "true"
   );
 
-
-  document.body.classList.remove(
-    "no-scroll"
-  );
+  document.body.style.overflow =
+    "";
 
 }
 
 
+closeDetails.addEventListener(
+  "click",
+  closePanel
+);
 
-document.addEventListener(
+
+detailsOverlay.addEventListener(
   "click",
   event => {
 
     if (
-      event.target.closest(
-        "[data-close]"
-      )
+      event.target === detailsOverlay
     ) {
 
-      closeDetails();
+      closePanel();
 
     }
 
@@ -780,6 +404,10 @@ document.addEventListener(
 );
 
 
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
 
 document.addEventListener(
   "keydown",
@@ -787,7 +415,7 @@ document.addEventListener(
 
     if (event.key === "Escape") {
 
-      closeDetails();
+      closePanel();
 
     }
 
@@ -796,48 +424,105 @@ document.addEventListener(
 
 
 
-function getInitialDay() {
+/* =========================================================
+   PREVIOUS DAY
+========================================================= */
 
-  const hashMatch =
-    location.hash.match(
-      /^#day-(\d+)/
-    );
+detailPrev.addEventListener(
+  "click",
+  () => {
+
+    const previous =
+      projectDays
+        .filter(
+          item =>
+            item.day < currentDay &&
+            item.uploaded
+        )
+        .sort(
+          (a, b) =>
+            b.day - a.day
+        )[0];
 
 
-  if (hashMatch) {
+    if (!previous) return;
 
-    return Math.min(
-      TOTAL_DAYS,
-      Math.max(
-        1,
-        Number(hashMatch[1])
-      )
-    );
+
+    currentDay =
+      previous.day;
+
+
+    renderDay(currentDay);
+
+    updateDetails(previous);
 
   }
+);
 
 
-  const uploadedDays =
-    DAYS
-      .filter(uploaded)
-      .map(day => day.day);
+
+/* =========================================================
+   NEXT DAY
+========================================================= */
+
+detailNext.addEventListener(
+  "click",
+  () => {
+
+    const next =
+      projectDays
+        .filter(
+          item =>
+            item.day > currentDay &&
+            item.uploaded
+        )
+        .sort(
+          (a, b) =>
+            a.day - b.day
+        )[0];
 
 
-  if (uploadedDays.length) {
+    if (!next) return;
 
-    return Math.max(
-      ...uploadedDays
-    );
+
+    currentDay =
+      next.day;
+
+
+    renderDay(currentDay);
+
+    updateDetails(next);
 
   }
+);
 
 
-  return 1;
+
+/* =========================================================
+   COMPLETED COUNT
+========================================================= */
+
+function updateCompletedCount() {
+
+  const count =
+    projectDays.filter(
+      item => item.uploaded
+    ).length;
+
+
+  completedCount.textContent =
+    String(count).padStart(2, "0");
 
 }
 
 
 
-renderDay(
-  getInitialDay()
-);
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+buildDaySelector();
+
+renderDay(currentDay);
+
+updateCompletedCount();
