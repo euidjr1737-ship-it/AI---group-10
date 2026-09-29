@@ -2,43 +2,47 @@
    ELEMENTS
 ========================================================= */
 
-const daySelector =
-  document.getElementById("daySelector");
+const archiveDay =
+  document.getElementById("archiveDay");
 
-const dayNumber =
-  document.getElementById("dayNumber");
+const archiveDate =
+  document.getElementById("archiveDate");
 
-const dayDate =
-  document.getElementById("dayDate");
+const archiveTitle =
+  document.getElementById("archiveTitle");
 
-const dayTitle =
-  document.getElementById("dayTitle");
-
-const uploadedBadge =
-  document.getElementById("uploadedBadge");
+const statusStamp =
+  document.getElementById("statusStamp");
 
 const videoContainer =
   document.getElementById("videoContainer");
 
-const completedCount =
-  document.getElementById("completedCount");
+const viewDetails =
+  document.getElementById("viewDetails");
+
+const dayGrid =
+  document.getElementById("dayGrid");
+
+const completedDays =
+  document.getElementById("completedDays");
+
+const transitionProgress =
+  document.getElementById("transitionProgress");
 
 
-const detailsButton =
-  document.getElementById("detailsButton");
+/* DETAIL */
 
-const detailsOverlay =
-  document.getElementById("detailsOverlay");
+const detailOverlay =
+  document.getElementById("detailOverlay");
 
-const closeDetails =
-  document.getElementById("closeDetails");
-
+const detailClose =
+  document.getElementById("detailClose");
 
 const detailDay =
   document.getElementById("detailDay");
 
-const detailTitle =
-  document.getElementById("detailTitle");
+const detailDate =
+  document.getElementById("detailDate");
 
 const detailDescription =
   document.getElementById("detailDescription");
@@ -52,145 +56,109 @@ const detailNote =
 const promptFile =
   document.getElementById("promptFile");
 
+const promptFileName =
+  document.getElementById("promptFileName");
 
-const detailPrev =
-  document.getElementById("detailPrev");
+const previousDay =
+  document.getElementById("previousDay");
 
-const detailNext =
-  document.getElementById("detailNext");
-
+const nextDay =
+  document.getElementById("nextDay");
 
 
 /* =========================================================
    STATE
+
+   가장 최근 업로드 DAY를 첫 화면에 보여줌.
+   지금은 DAY 02.
 ========================================================= */
 
-let currentDay = 1;
+const uploadedDays =
+  projectDays.filter(item => item.uploaded);
 
+let currentDay =
+  uploadedDays.length
+    ? uploadedDays[uploadedDays.length - 1].day
+    : 1;
 
 
 /* =========================================================
-   DAY SELECTOR
+   HELPERS
 ========================================================= */
 
-function buildDaySelector() {
+function getDay(dayNumber) {
 
-  daySelector.innerHTML = "";
+  return projectDays.find(
+    item => item.day === dayNumber
+  );
+
+}
+
+
+function formatDay(dayNumber) {
+
+  return `DAY ${String(dayNumber).padStart(2, "0")}`;
+
+}
+
+
+/* =========================================================
+   BUILD DAY BUTTONS
+========================================================= */
+
+function buildDayGrid() {
+
+  dayGrid.innerHTML = "";
 
   projectDays.forEach(item => {
 
     const button =
       document.createElement("button");
 
-    button.className = "day-button";
+    button.type = "button";
+
+    button.className =
+      "day-button";
 
     button.textContent =
       String(item.day).padStart(2, "0");
 
+
     if (item.uploaded) {
-      button.classList.add("available");
+
+      button.classList.add(
+        "available"
+      );
+
     }
+
 
     if (item.day === currentDay) {
-      button.classList.add("active");
+
+      button.classList.add(
+        "active"
+      );
+
     }
 
-    button.addEventListener("click", () => {
 
-      currentDay = item.day;
+    button.addEventListener(
+      "click",
+      () => {
 
-      renderDay(currentDay);
+        currentDay = item.day;
 
-    });
+        renderCurrentDay();
 
-    daySelector.appendChild(button);
+      }
+    );
+
+
+    dayGrid.appendChild(button);
 
   });
 
 }
-
-
-
-/* =========================================================
-   RENDER CURRENT DAY
-========================================================= */
-
-function renderDay(day) {
-
-  const data =
-    projectDays.find(item => item.day === day);
-
-  if (!data) return;
-
-
-  /* HEADER */
-
-  dayNumber.textContent =
-    `DAY ${String(data.day).padStart(2, "0")}`;
-
-
-  dayDate.textContent =
-    data.date || "—";
-
-
-  dayTitle.textContent =
-    data.uploaded
-      ? data.title
-      : `DAY ${String(data.day).padStart(2, "0")}`;
-
-
-  /* UPLOADED */
-
-  uploadedBadge.style.display =
-    data.uploaded
-      ? "inline-flex"
-      : "none";
-
-
-  /* VIDEO */
-
-  renderVideo(data);
-
-
-  /* DETAIL BUTTON */
-
-  if (data.uploaded) {
-
-    detailsButton.disabled = false;
-
-    detailsButton.style.opacity = "1";
-
-    detailsButton.style.cursor = "pointer";
-
-  } else {
-
-    detailsButton.disabled = true;
-
-    detailsButton.style.opacity = "0.35";
-
-    detailsButton.style.cursor = "default";
-
-  }
-
-
-  /* SELECTOR */
-
-  document
-    .querySelectorAll(".day-button")
-    .forEach((button, index) => {
-
-      button.classList.toggle(
-        "active",
-        index + 1 === day
-      );
-
-    });
-
-
-  updateDetails(data);
-
-}
-
 
 
 /* =========================================================
@@ -205,9 +173,10 @@ function renderVideo(data) {
   ) {
 
     videoContainer.innerHTML = `
+
       <iframe
         src="https://www.youtube.com/embed/${data.youtubeId}"
-        title="DAY ${String(data.day).padStart(2, "0")} VIDEO"
+        title="${formatDay(data.day)} video"
         allow="
           accelerometer;
           autoplay;
@@ -217,50 +186,155 @@ function renderVideo(data) {
           picture-in-picture;
           web-share
         "
+        referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen>
       </iframe>
-    `;
-
-  } else {
-
-    videoContainer.innerHTML = `
-
-      <div class="video-placeholder">
-
-        <span>
-          DAY ${String(data.day).padStart(2, "0")}
-        </span>
-
-        <p>
-          ${
-            data.uploaded
-              ? "VIDEO COMING SOON"
-              : "NO ARCHIVE YET"
-          }
-        </p>
-
-      </div>
 
     `;
+
+    return;
 
   }
+
+
+  videoContainer.innerHTML = `
+
+    <div class="video-placeholder">
+
+      <span>
+        ${formatDay(data.day)}
+      </span>
+
+      <strong>
+        ${
+          data.uploaded
+            ? "VIDEO COMING SOON"
+            : "NO ARCHIVE YET"
+        }
+      </strong>
+
+    </div>
+
+  `;
 
 }
 
 
-
 /* =========================================================
-   DETAILS
+   RENDER CURRENT DAY
 ========================================================= */
 
-function updateDetails(data) {
+function renderCurrentDay() {
+
+  const data =
+    getDay(currentDay);
+
+  if (!data) return;
+
+
+  archiveDay.textContent =
+    formatDay(data.day);
+
+
+  archiveTitle.textContent =
+    formatDay(data.day);
+
+
+  archiveDate.textContent =
+    data.date || "—";
+
+
+  /* UPDATED STAMP */
+
+  if (data.uploaded) {
+
+    statusStamp.style.display =
+      "inline-flex";
+
+  } else {
+
+    statusStamp.style.display =
+      "none";
+
+  }
+
+
+  /* DETAILS */
+
+  if (data.uploaded) {
+
+    viewDetails.disabled = false;
+
+    viewDetails.style.opacity = "1";
+
+    viewDetails.style.cursor = "pointer";
+
+  } else {
+
+    viewDetails.disabled = true;
+
+    viewDetails.style.opacity = "0.35";
+
+    viewDetails.style.cursor = "default";
+
+  }
+
+
+  renderVideo(data);
+
+
+  document
+    .querySelectorAll(".day-button")
+    .forEach((button, index) => {
+
+      button.classList.toggle(
+        "active",
+        index + 1 === currentDay
+      );
+
+    });
+
+}
+
+
+/* =========================================================
+   COMPLETED
+========================================================= */
+
+function renderCompletedCount() {
+
+  const completed =
+    projectDays.filter(
+      item => item.uploaded
+    ).length;
+
+
+  const formatted =
+    String(completed).padStart(2, "0");
+
+
+  completedDays.textContent =
+    formatted;
+
+
+  transitionProgress.textContent =
+    `${formatted} / 30`;
+
+}
+
+
+/* =========================================================
+   DETAIL CONTENT
+========================================================= */
+
+function populateDetail(data) {
 
   detailDay.textContent =
-    `DAY ${String(data.day).padStart(2, "0")}`;
+    formatDay(data.day);
 
 
-  detailTitle.textContent =
-    data.title || `Day ${data.day}`;
+  detailDate.textContent =
+    data.date || "—";
 
 
   detailDescription.textContent =
@@ -278,136 +352,161 @@ function updateDetails(data) {
     "아직 기록이 없습니다.";
 
 
-  /* PROMPT FILE */
+  /* PDF */
 
   if (data.promptFile) {
 
-    promptFile.style.display = "grid";
+    promptFile.style.display =
+      "grid";
 
     promptFile.href =
       data.promptFile;
 
+    promptFileName.textContent =
+      data.promptFileName ||
+      "PROMPT PDF";
+
   } else {
 
-    promptFile.style.display = "none";
+    promptFile.style.display =
+      "none";
 
   }
 
 
-  /* PREVIOUS */
+  /* PREVIOUS AVAILABLE DAY */
 
-  detailPrev.disabled =
-    data.day <= 1;
+  const previous =
+    projectDays
+      .filter(
+        item =>
+          item.uploaded &&
+          item.day < data.day
+      )
+      .sort(
+        (a, b) =>
+          b.day - a.day
+      )[0];
 
 
-  detailPrev.style.opacity =
-    data.day <= 1
-      ? "0.25"
-      : "1";
-
-
-  /* NEXT */
+  /* NEXT AVAILABLE DAY */
 
   const next =
-    projectDays.find(
-      item =>
-        item.day === data.day + 1 &&
-        item.uploaded
-    );
+    projectDays
+      .filter(
+        item =>
+          item.uploaded &&
+          item.day > data.day
+      )
+      .sort(
+        (a, b) =>
+          a.day - b.day
+      )[0];
 
 
-  detailNext.disabled =
+  previousDay.disabled =
+    !previous;
+
+
+  nextDay.disabled =
     !next;
-
-
-  detailNext.style.opacity =
-    next
-      ? "1"
-      : "0.25";
 
 }
 
 
-
 /* =========================================================
-   OPEN DETAILS
+   OPEN DETAIL
 ========================================================= */
 
-detailsButton.addEventListener(
-  "click",
-  () => {
+function openDetail() {
 
-    const data =
-      projectDays.find(
-        item => item.day === currentDay
-      );
+  const data =
+    getDay(currentDay);
 
-    if (!data || !data.uploaded) {
-      return;
-    }
-
-    updateDetails(data);
-
-    detailsOverlay.classList.add("open");
-
-    detailsOverlay.setAttribute(
-      "aria-hidden",
-      "false"
-    );
-
-    document.body.style.overflow =
-      "hidden";
-
+  if (
+    !data ||
+    !data.uploaded
+  ) {
+    return;
   }
-);
 
+
+  populateDetail(data);
+
+
+  detailOverlay.classList.add(
+    "open"
+  );
+
+
+  detailOverlay.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+
+  document.body.classList.add(
+    "detail-open"
+  );
+
+}
 
 
 /* =========================================================
-   CLOSE DETAILS
+   CLOSE DETAIL
 ========================================================= */
 
-function closePanel() {
+function closeDetail() {
 
-  detailsOverlay.classList.remove("open");
+  detailOverlay.classList.remove(
+    "open"
+  );
 
-  detailsOverlay.setAttribute(
+
+  detailOverlay.setAttribute(
     "aria-hidden",
     "true"
   );
 
-  document.body.style.overflow =
-    "";
+
+  document.body.classList.remove(
+    "detail-open"
+  );
 
 }
 
 
-closeDetails.addEventListener(
+/* =========================================================
+   EVENTS
+========================================================= */
+
+viewDetails.addEventListener(
   "click",
-  closePanel
+  openDetail
 );
 
 
-detailsOverlay.addEventListener(
+detailClose.addEventListener(
+  "click",
+  closeDetail
+);
+
+
+detailOverlay.addEventListener(
   "click",
   event => {
 
     if (
-      event.target === detailsOverlay
+      event.target === detailOverlay
     ) {
 
-      closePanel();
+      closeDetail();
 
     }
 
   }
 );
 
-
-
-/* =========================================================
-   KEYBOARD
-========================================================= */
 
 document.addEventListener(
   "keydown",
@@ -415,7 +514,7 @@ document.addEventListener(
 
     if (event.key === "Escape") {
 
-      closePanel();
+      closeDetail();
 
     }
 
@@ -423,12 +522,11 @@ document.addEventListener(
 );
 
 
-
 /* =========================================================
-   PREVIOUS DAY
+   PREVIOUS DETAIL DAY
 ========================================================= */
 
-detailPrev.addEventListener(
+previousDay.addEventListener(
   "click",
   () => {
 
@@ -436,8 +534,8 @@ detailPrev.addEventListener(
       projectDays
         .filter(
           item =>
-            item.day < currentDay &&
-            item.uploaded
+            item.uploaded &&
+            item.day < currentDay
         )
         .sort(
           (a, b) =>
@@ -452,20 +550,19 @@ detailPrev.addEventListener(
       previous.day;
 
 
-    renderDay(currentDay);
+    renderCurrentDay();
 
-    updateDetails(previous);
+    populateDetail(previous);
 
   }
 );
 
 
-
 /* =========================================================
-   NEXT DAY
+   NEXT DETAIL DAY
 ========================================================= */
 
-detailNext.addEventListener(
+nextDay.addEventListener(
   "click",
   () => {
 
@@ -473,8 +570,8 @@ detailNext.addEventListener(
       projectDays
         .filter(
           item =>
-            item.day > currentDay &&
-            item.uploaded
+            item.uploaded &&
+            item.day > currentDay
         )
         .sort(
           (a, b) =>
@@ -489,40 +586,20 @@ detailNext.addEventListener(
       next.day;
 
 
-    renderDay(currentDay);
+    renderCurrentDay();
 
-    updateDetails(next);
+    populateDetail(next);
 
   }
 );
 
 
-
 /* =========================================================
-   COMPLETED COUNT
+   INIT
 ========================================================= */
 
-function updateCompletedCount() {
+buildDayGrid();
 
-  const count =
-    projectDays.filter(
-      item => item.uploaded
-    ).length;
+renderCurrentDay();
 
-
-  completedCount.textContent =
-    String(count).padStart(2, "0");
-
-}
-
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-buildDaySelector();
-
-renderDay(currentDay);
-
-updateCompletedCount();
+renderCompletedCount();
