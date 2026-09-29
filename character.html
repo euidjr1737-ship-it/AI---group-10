@@ -1,24 +1,21 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ko">
 
 <head>
 
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  />
+  >
 
   <title>
-    Character Sheet — TEAM 10
+    CHARACTER SHEET — TEAM 10
   </title>
 
 
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 
   <link
     rel="preconnect"
@@ -26,12 +23,10 @@
     crossorigin
   >
 
-
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
-
 
   <link
     rel="stylesheet"
@@ -42,50 +37,52 @@
   <style>
 
     .character-page {
+      min-height: 100vh;
+
       padding:
-        65px
-        4vw
+        70px
+        4.5vw
         120px;
     }
 
 
-    .character-page-head {
-      max-width: 1280px;
+    .character-page-heading {
+      max-width: 1380px;
 
-      margin: 0 auto 70px;
+      margin: 0 auto 75px;
 
       display: grid;
 
       grid-template-columns:
-        1fr
-        0.7fr;
+        1.1fr
+        0.6fr;
 
-      gap: 70px;
+      gap: 80px;
 
       align-items: end;
     }
 
 
-    .character-page-kicker {
+    .character-kicker {
       display: block;
 
-      margin-bottom: 20px;
+      margin-bottom: 21px;
 
       font-family:
         var(--font-en);
 
-      font-size: 11px;
+      font-size: 10px;
 
       font-weight: 600;
 
-      letter-spacing: 0.12em;
+      letter-spacing: 0.13em;
 
       color:
         var(--clay-dark);
     }
 
 
-    .character-page-title {
+    .character-page-heading h1 {
       margin: 0;
 
       font-family:
@@ -93,41 +90,45 @@
 
       font-size:
         clamp(
-          65px,
+          72px,
           9vw,
-          135px
+          138px
         );
+
+      font-weight: 700;
 
       line-height: 0.8;
 
-      letter-spacing: -0.075em;
+      letter-spacing:
+        -0.075em;
     }
 
 
-    .character-page-description {
+    .character-intro {
+      max-width: 430px;
+
       margin: 0;
 
-      max-width: 440px;
+      padding-bottom: 5px;
 
-      font-size: 14px;
+      font-size: 13px;
 
-      line-height: 1.9;
+      line-height: 1.95;
 
       color:
         var(--ink-soft);
 
-      word-break: keep-all;
+      word-break:
+        keep-all;
     }
 
 
-
     /* ===============================================
-       GRID
+       GALLERY
     =============================================== */
 
-
     .character-gallery {
-      max-width: 1280px;
+      max-width: 1380px;
 
       margin: 0 auto;
 
@@ -136,33 +137,74 @@
       grid-template-columns:
         repeat(2, 1fr);
 
-      gap: 18px;
+      gap: 20px;
     }
 
 
-    .character-item {
+    .character-card {
       overflow: hidden;
-
-      border-radius:
-        18px;
 
       border:
         1px solid
         var(--line);
 
+      border-radius:
+        21px 18px 23px 19px;
+
       background:
-        #e8ddd1;
+        #e6dbcf;
+
+      transition:
+        transform
+        0.3s ease,
+        box-shadow
+        0.3s ease;
+    }
+
+
+    .character-card:hover {
+      transform:
+        translateY(-4px);
+
+      box-shadow:
+        0 18px 40px
+        rgba(
+          70,
+          52,
+          44,
+          0.07
+        );
     }
 
 
     .character-image {
+      position: relative;
+
+      overflow: hidden;
+
       aspect-ratio:
         16 / 10;
 
-      background:
-        #ded2c5;
+      display: flex;
 
-      overflow: hidden;
+      align-items: center;
+
+      justify-content: center;
+
+      background:
+        radial-gradient(
+          circle
+          at 25% 20%,
+          rgba(
+            255,
+            255,
+            255,
+            0.45
+          ),
+          transparent
+          24%
+        ),
+        #ddd0c2;
     }
 
 
@@ -184,15 +226,61 @@
     }
 
 
-    .character-item:hover
+    .character-card:hover
     .character-image img {
       transform:
         scale(1.025);
     }
 
 
+    .image-placeholder {
+      position: absolute;
+
+      inset: 0;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      color:
+        #96887e;
+    }
+
+
+    .image-placeholder span {
+      font-family:
+        var(--font-en);
+
+      font-size: 10px;
+
+      font-weight: 600;
+
+      letter-spacing:
+        0.12em;
+    }
+
+
+    .image-placeholder strong {
+      font-family:
+        var(--font-en);
+
+      font-size: 18px;
+
+      font-weight: 600;
+
+      letter-spacing:
+        -0.03em;
+    }
+
+
     .character-caption {
-      min-height: 75px;
+      min-height: 78px;
 
       padding:
         17px
@@ -200,11 +288,10 @@
 
       display: flex;
 
+      align-items: center;
+
       justify-content:
         space-between;
-
-      align-items:
-        center;
     }
 
 
@@ -215,6 +302,9 @@
       font-size: 13px;
 
       font-weight: 600;
+
+      letter-spacing:
+        -0.02em;
     }
 
 
@@ -225,18 +315,18 @@
       font-size: 9px;
 
       letter-spacing:
-        0.08em;
+        0.09em;
 
       color:
-        var(--ink-soft);
+        var(--ink-faint);
     }
 
 
-    .character-back {
-      max-width: 1280px;
+    .back-home {
+      max-width: 1380px;
 
       margin:
-        60px
+        65px
         auto
         0;
 
@@ -249,43 +339,27 @@
     }
 
 
-    .character-back a {
+    .back-home a {
       font-family:
         var(--font-en);
 
-      font-size:
-        12px;
+      font-size: 12px;
 
-      font-weight:
-        600;
+      font-weight: 600;
 
       letter-spacing:
-        0.03em;
+        0.02em;
     }
-
-
-
-    /* ===============================================
-       MISSING IMAGE
-    =============================================== */
-
-
-    .character-image img {
-      background:
-        #e4d8cb;
-    }
-
 
 
     @media
     (max-width: 800px) {
 
-      .character-page-head {
+      .character-page-heading {
         grid-template-columns:
           1fr;
 
-        gap:
-          40px;
+        gap: 40px;
       }
 
 
@@ -296,18 +370,36 @@
 
     }
 
+
+    @media
+    (max-width: 600px) {
+
+      .character-page {
+        padding:
+          55px
+          20px
+          90px;
+      }
+
+
+      .character-page-heading h1 {
+        font-size:
+          17vw;
+      }
+
+    }
+
   </style>
 
 </head>
 
 
-
 <body>
 
+  <div class="page-noise"></div>
 
-  <!-- ===============================================
-       HEADER
-  ================================================ -->
+
+  <!-- HEADER -->
 
   <header class="site-header">
 
@@ -316,11 +408,11 @@
       class="brand"
     >
 
-      <span class="brand-title">
+      <strong>
         TEAM 10
-      </span>
+      </strong>
 
-      <span class="brand-sub">
+      <span>
         성균관대학교 영상학과 · AI기반영상제작워크샵
       </span>
 
@@ -339,6 +431,7 @@
 
       <a href="./character.html">
         CHARACTER SHEET
+        <span>↗</span>
       </a>
 
     </nav>
@@ -347,23 +440,17 @@
 
 
 
-  <!-- ===============================================
-       CHARACTER PAGE
-  ================================================ -->
-
   <main class="character-page">
 
-
-    <section class="character-page-head">
-
+    <section class="character-page-heading">
 
       <div>
 
-        <span class="character-page-kicker">
-          VISUAL DEVELOPMENT
+        <span class="character-kicker">
+          VISUAL DEVELOPMENT · 01—07
         </span>
 
-        <h1 class="character-page-title">
+        <h1>
           CHARACTER<br>
           SHEET
         </h1>
@@ -371,250 +458,25 @@
       </div>
 
 
-      <p class="character-page-description">
+      <p class="character-intro">
 
         프로젝트에 등장하는 캐릭터의 형태,
         표정, 의상과 시각적 특징을 정리한
-        캐릭터 아카이브입니다.
+        비주얼 아카이브입니다.
 
       </p>
 
-
     </section>
 
 
 
-    <!-- ===============================================
-         CHARACTER IMAGES
+    <section
+      class="character-gallery"
+      id="characterGallery"
+    ></section>
 
-         GitHub에 이미지를 올릴 때
 
-         character-01.png
-         character-02.png
-         character-03.png
-         ...
-
-         이렇게 이름만 맞추면 됨.
-    ================================================ -->
-
-
-    <section class="character-gallery">
-
-
-      <!-- 01 -->
-
-      <article class="character-item">
-
-        <div class="character-image">
-
-          <img
-            src="./character-01.png"
-            alt="Character sheet 01"
-            onerror="this.style.display='none'"
-          >
-
-        </div>
-
-        <div class="character-caption">
-
-          <strong>
-            CHARACTER 01
-          </strong>
-
-          <span>
-            CHARACTER SHEET
-          </span>
-
-        </div>
-
-      </article>
-
-
-
-      <!-- 02 -->
-
-      <article class="character-item">
-
-        <div class="character-image">
-
-          <img
-            src="./character-02.png"
-            alt="Character sheet 02"
-            onerror="this.style.display='none'"
-          >
-
-        </div>
-
-        <div class="character-caption">
-
-          <strong>
-            CHARACTER 02
-          </strong>
-
-          <span>
-            CHARACTER SHEET
-          </span>
-
-        </div>
-
-      </article>
-
-
-
-      <!-- 03 -->
-
-      <article class="character-item">
-
-        <div class="character-image">
-
-          <img
-            src="./character-03.png"
-            alt="Character sheet 03"
-            onerror="this.style.display='none'"
-          >
-
-        </div>
-
-        <div class="character-caption">
-
-          <strong>
-            CHARACTER 03
-          </strong>
-
-          <span>
-            CHARACTER SHEET
-          </span>
-
-        </div>
-
-      </article>
-
-
-
-      <!-- 04 -->
-
-      <article class="character-item">
-
-        <div class="character-image">
-
-          <img
-            src="./character-04.png"
-            alt="Character sheet 04"
-            onerror="this.style.display='none'"
-          >
-
-        </div>
-
-        <div class="character-caption">
-
-          <strong>
-            CHARACTER 04
-          </strong>
-
-          <span>
-            CHARACTER SHEET
-          </span>
-
-        </div>
-
-      </article>
-
-
-
-      <!-- 05 -->
-
-      <article class="character-item">
-
-        <div class="character-image">
-
-          <img
-            src="./character-05.png"
-            alt="Character sheet 05"
-            onerror="this.style.display='none'"
-          >
-
-        </div>
-
-        <div class="character-caption">
-
-          <strong>
-            CHARACTER 05
-          </strong>
-
-          <span>
-            CHARACTER SHEET
-          </span>
-
-        </div>
-
-      </article>
-
-
-
-      <!-- 06 -->
-
-      <article class="character-item">
-
-        <div class="character-image">
-
-          <img
-            src="./character-06.png"
-            alt="Character sheet 06"
-            onerror="this.style.display='none'"
-          >
-
-        </div>
-
-        <div class="character-caption">
-
-          <strong>
-            CHARACTER 06
-          </strong>
-
-          <span>
-            CHARACTER SHEET
-          </span>
-
-        </div>
-
-      </article>
-
-
-
-      <!-- 07 -->
-
-      <article class="character-item">
-
-        <div class="character-image">
-
-          <img
-            src="./character-07.png"
-            alt="Character sheet 07"
-            onerror="this.style.display='none'"
-          >
-
-        </div>
-
-        <div class="character-caption">
-
-          <strong>
-            CHARACTER 07
-          </strong>
-
-          <span>
-            CHARACTER SHEET
-          </span>
-
-        </div>
-
-      </article>
-
-
-    </section>
-
-
-
-    <div class="character-back">
+    <div class="back-home">
 
       <a href="./index.html">
         ← BACK TO PROJECT
@@ -622,14 +484,9 @@
 
     </div>
 
-
   </main>
 
 
-
-  <!-- ===============================================
-       FOOTER
-  ================================================ -->
 
   <footer class="site-footer">
 
@@ -645,13 +502,129 @@
 
     </div>
 
-
-    <div class="footer-year">
-      30 DAYS PROJECT · 2026
-    </div>
+    <span>
+      CHARACTER ARCHIVE · 2026
+    </span>
 
   </footer>
 
+
+
+  <script>
+
+    const gallery =
+      document.getElementById(
+        "characterGallery"
+      );
+
+
+    for (
+      let i = 1;
+      i <= 7;
+      i++
+    ) {
+
+      const number =
+        String(i).padStart(
+          2,
+          "0"
+        );
+
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+
+      card.className =
+        "character-card";
+
+
+      card.innerHTML = `
+
+        <div class="character-image">
+
+          <div
+            class="image-placeholder"
+          >
+
+            <span>
+              CHARACTER ARCHIVE
+            </span>
+
+            <strong>
+              ${number}
+            </strong>
+
+          </div>
+
+
+          <img
+            src="./character-${number}.png"
+            alt="Character ${number}"
+          >
+
+        </div>
+
+
+        <div
+          class="character-caption"
+        >
+
+          <strong>
+            CHARACTER ${number}
+          </strong>
+
+          <span>
+            CHARACTER SHEET
+          </span>
+
+        </div>
+
+      `;
+
+
+      const image =
+        card.querySelector("img");
+
+
+      const placeholder =
+        card.querySelector(
+          ".image-placeholder"
+        );
+
+
+      image.addEventListener(
+        "load",
+        () => {
+
+          placeholder.style.display =
+            "none";
+
+        }
+      );
+
+
+      image.addEventListener(
+        "error",
+        () => {
+
+          image.style.display =
+            "none";
+
+          placeholder.style.display =
+            "flex";
+
+        }
+      );
+
+
+      gallery.appendChild(card);
+
+    }
+
+  </script>
 
 </body>
 </html>
