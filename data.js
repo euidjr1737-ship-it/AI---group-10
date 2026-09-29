@@ -4,81 +4,69 @@ const projectDays = [
      DAY 01
   ====================================================== */
 
- {
-  day: 1,
+  {
+    day: 1,
 
-  date: "2026.09.28",
+    date: "2026.09.28",
 
-  title: "First Motion Test",
+    title: "DAY 01",
 
-  uploaded: true,
+    uploaded: true,
 
-  youtubeId: "ehvclCeThqU",
+    youtubeId: "ehvclCeThqU",
 
-  description:
-    "캐릭터와 공간의 시각적 방향을 설정하고, 이를 실제 움직임으로 연결하기 위한 첫 번째 영상 생성 테스트를 진행했다.",
+    description:
+      "건축 사무소 회의 시간, 팀장이 어려운 설계를 설명하는 동안 주인공은 멍하니 볼펜을 만지작거린다. 딴생각에 빠진 사이 볼펜들이 저절로 쌓여 탑이 되는 상상이 펼쳐진다. 정신을 차려 보니 그 탑이 실제로 책상 위에 서 있고, 팀원들이 조용히 주인공을 바라보고 있다.",
 
-  prompt:
-    "DAY 01에서는 캐릭터의 외형과 장면의 기본 구성을 유지하면서 움직임을 생성하는 테스트를 진행했다. 전체 프롬프트 기록은 아래 PDF 파일에서 확인할 수 있다.",
+    prompt:
+      "DAY 01에서 사용한 전체 프롬프트와 생성 기록은 아래 PDF 파일에서 확인할 수 있습니다.",
 
-  promptFile: "./day1-prompt.pdf",
+    promptFile: "./day1-prompt.pdf",
 
-  note:
-    "정지 이미지에서 설정한 캐릭터의 형태와 재질이 영상에서도 어느 정도 유지되는지 확인했다. 이후 작업에서는 캐릭터의 일관성과 움직임의 자연스러움을 중심으로 테스트를 이어갈 예정이다."
-},
+    promptFileName: "DAY 01 · PROMPT PDF",
 
-{
-  day: 2,
+    note:
+      ": Nanobanana Pro로 네 컷의 흐름(회의 상황, 딴생각, 볼펜 탑, 들킨 순간)을 2×2 스토리보드 한 장으로 먼저 잡고, 레퍼런스 이미지로 분위기와 캐릭터를 고정했다. 그 이미지를 첫 프레임으로 천천히 다가가는 카메라 무브와 캐릭터의 지친 연기가 담긴 영상을 만들었다."
+  },
 
-  date: "2026.09.29",
-
-  title: "Day 02",
-
-  uploaded: true,
-
-  youtubeId: "yj5tk5_3hyc",
-
-  description: "",
-
-  prompt: "",
-
-  promptFile: "",
-
-  note: ""
-},
 
   /* =====================================================
-     DAY 03
+     DAY 02
   ====================================================== */
 
   {
-    day: 3,
+    day: 2,
 
-    date: "",
+    date: "2026.09.29",
 
-    title: "Day 03",
+    title: "DAY 02",
 
-    uploaded: false,
+    uploaded: true,
 
-    youtubeId: "",
+    youtubeId: "yj5tk5_3hyc",
 
-    description: "",
+    description:
+      "회의실 화이트보드에 붙은 탑 도면 앞에서 팀장이 분필로 보강 구조를 덧그리며 설명을 이어 간다. 그런데 분필 구조만 남긴 채 탑 도면이 국수 가락처럼 힘없이 흘러내려 무너지고 만다. 팀원들은 머리를 감싸 쥐며 절망하고, 주인공은 턱을 괸 채 멍하니 허공만 바라본다.",
 
-    prompt: "",
+    prompt:
+      "DAY 02에서 사용한 전체 프롬프트와 생성 과정은 아래 PDF 파일에서 확인할 수 있습니다.",
 
-    promptFile: "",
+    promptFile: "./day2-prompt.pdf",
 
-    note: ""
+    promptFileName: "DAY 02 · PROMPT PDF",
+
+    note:
+      "캐릭터 시트 네 장, 회의실 레퍼런스, 배치도까지 넣어 인물과 공간이 흔들리지 않는 스토리보드를 만들었다. 이를 첫 프레임과 캐릭터 레퍼런스로 삼아, 프레젠테이션, 분필 보강, 붕괴, 역방향 리액션이 이어지는 15초짜리 영상으로 만들었다."
   }
 
 ];
 
 
-/*
-  DAY 04 ~ DAY 30 자동 생성
-*/
+/* =====================================================
+   DAY 03 — DAY 30
+===================================================== */
 
-for (let i = 4; i <= 30; i++) {
+for (let i = 3; i <= 30; i++) {
 
   projectDays.push({
 
@@ -86,7 +74,7 @@ for (let i = 4; i <= 30; i++) {
 
     date: "",
 
-    title: `Day ${String(i).padStart(2, "0")}`,
+    title: `DAY ${String(i).padStart(2, "0")}`,
 
     uploaded: false,
 
@@ -97,6 +85,8 @@ for (let i = 4; i <= 30; i++) {
     prompt: "",
 
     promptFile: "",
+
+    promptFileName: "",
 
     note: ""
 
