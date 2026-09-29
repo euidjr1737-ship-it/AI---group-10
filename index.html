@@ -1,19 +1,524 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>30 DAYS PROJECT</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ADHD — 30 DAYS PROJECT</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
 </head>
-<body id="top">
-<header class="top"><a class="brand" href="#top" id="brand"></a><nav id="nav"></nav></header>
-<main id="app"></main>
-<footer id="foot"></footer>
-<script src="data.js"></script>
-<script src="script.js"></script>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+
+    <a href="#" class="logo">
+      ADHD
+    </a>
+
+    <div class="header-right">
+      <span>30 DAYS PROJECT</span>
+      <span>10조</span>
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       MAIN ARCHIVE
+       ===================================================== -->
+
+  <main id="archive-page">
+
+    <!-- HERO -->
+    <section class="hero">
+
+      <p class="school">
+        성균관대학교 영상학과 · AI기반영상워크샵 · 10조
+      </p>
+
+
+      <div class="hero-title">
+
+        <h1>ADHD</h1>
+
+        <div class="counter">
+
+          <span id="current-count">
+            01
+          </span>
+
+          <span class="slash">
+            /
+          </span>
+
+          <span>
+            30
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-bottom">
+
+        <div>
+
+          <p class="project-name">
+            A DOZEN HEADY DISTRACTIONS
+          </p>
+
+          <p class="members">
+            이청하 · 최도준 · 이유민
+          </p>
+
+        </div>
+
+
+        <p class="archive-label">
+          AI VIDEO ARCHIVE · 2026
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SELECTED DAY
+         ===================================================== -->
+
+    <section class="featured">
+
+      <div class="day-heading">
+
+        <div>
+
+          <p class="mini-label">
+            CURRENT ARCHIVE
+          </p>
+
+          <div
+            class="day-number"
+            id="day-number"
+          >
+            DAY 01
+          </div>
+
+        </div>
+
+
+        <div class="day-date-area">
+
+          <span class="date-label">
+            DATE
+          </span>
+
+          <p
+            class="date"
+            id="day-date"
+          >
+            2026.09.28
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- IMAGE / VIDEO -->
+      <div class="media-grid">
+
+        <article class="media-card">
+
+          <div class="media-top">
+
+            <span>
+              IMAGE
+            </span>
+
+            <span id="image-day-label">
+              DAY 01
+            </span>
+
+          </div>
+
+
+          <div
+            class="image-box"
+            id="image-box"
+          ></div>
+
+        </article>
+
+
+        <article class="media-card">
+
+          <div class="media-top">
+
+            <span>
+              VIDEO
+            </span>
+
+            <span id="video-day-label">
+              DAY 01
+            </span>
+
+          </div>
+
+
+          <div
+            class="video-box"
+            id="video-box"
+          ></div>
+
+        </article>
+
+      </div>
+
+
+      <!-- DETAIL LINK -->
+      <button
+        class="details-card"
+        id="details-button"
+        type="button"
+        aria-label="상세 제작 기록 보기"
+      >
+
+        <div class="details-card-left">
+
+          <span class="details-kicker">
+            PROCESS ARCHIVE
+          </span>
+
+          <div class="details-main-link">
+
+            <span>
+              VIEW DETAILS
+            </span>
+
+            <span class="details-arrow">
+              →
+            </span>
+
+          </div>
+
+          <span class="details-description">
+            DESCRIPTION · PROMPT · NOTE
+          </span>
+
+        </div>
+
+
+        <div class="details-card-number">
+          01
+        </div>
+
+      </button>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         30 DAYS
+         ===================================================== -->
+
+    <section class="days">
+
+      <div class="days-heading">
+
+        <h2>
+          30 DAYS
+        </h2>
+
+        <p>
+          SELECT A DAY
+        </p>
+
+      </div>
+
+
+      <div
+        class="day-grid"
+        id="day-grid"
+      ></div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PROJECT FOOTER
+         ===================================================== -->
+
+    <section class="project-footer">
+
+      <div>
+
+        <span class="small-label">
+          PROJECT
+        </span>
+
+        <h2>
+          A DOZEN<br>
+          HEADY DISTRACTIONS
+        </h2>
+
+      </div>
+
+
+      <div class="footer-info">
+
+        <p>
+          성균관대학교 영상학과
+        </p>
+
+        <p>
+          AI기반영상워크샵 · 10조
+        </p>
+
+        <p>
+          이청하 · 최도준 · 이유민
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =====================================================
+       DETAIL PAGE
+       ===================================================== -->
+
+  <main
+    id="detail-page"
+    class="detail-page hidden"
+  >
+
+    <!-- DETAIL HERO -->
+    <section class="detail-hero">
+
+      <button
+        class="back-button"
+        id="back-button"
+        type="button"
+      >
+        ← BACK TO ARCHIVE
+      </button>
+
+
+      <div class="detail-title-row">
+
+        <div>
+
+          <p
+            class="detail-date"
+            id="detail-date"
+          ></p>
+
+          <h1
+            class="detail-day"
+            id="detail-day"
+          >
+            DAY 01
+          </h1>
+
+        </div>
+
+
+        <div class="detail-title-box">
+
+          <p>
+            PROCESS ARCHIVE
+          </p>
+
+          <h2 id="detail-title">
+            WORK LOG
+          </h2>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- DESCRIPTION -->
+    <section class="detail-section">
+
+      <div class="detail-label">
+        01
+      </div>
+
+      <div class="detail-content">
+
+        <p class="section-name">
+          DESCRIPTION
+        </p>
+
+        <p
+          class="description-text"
+          id="detail-description"
+        ></p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- PROMPT -->
+    <section class="detail-section">
+
+      <div class="detail-label">
+        02
+      </div>
+
+      <div class="detail-content">
+
+        <p class="section-name">
+          PROMPT
+        </p>
+
+
+        <!-- 텍스트 프롬프트 -->
+        <div
+          class="prompt-box"
+          id="prompt-text-box"
+        >
+
+          <pre id="detail-prompt"></pre>
+
+          <button
+            class="copy-button"
+            id="copy-button"
+            type="button"
+          >
+            COPY PROMPT
+          </button>
+
+        </div>
+
+
+        <!-- 파일 프롬프트 -->
+        <div
+          class="prompt-file-box hidden"
+          id="prompt-file-box"
+        >
+
+          <div class="prompt-file-info">
+
+            <span class="prompt-file-label">
+              PROMPT DOCUMENT
+            </span>
+
+            <strong id="prompt-file-name">
+              DAY 01 PROMPT FILE
+            </strong>
+
+          </div>
+
+
+          <a
+            class="prompt-file-link"
+            id="prompt-file-link"
+            href="#"
+            target="_blank"
+            rel="noopener"
+          >
+            VIEW PROMPT FILE
+            <span>↗</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- NOTE -->
+    <section class="detail-section">
+
+      <div class="detail-label">
+        03
+      </div>
+
+      <div class="detail-content">
+
+        <p class="section-name">
+          NOTE
+        </p>
+
+        <p
+          class="description-text"
+          id="detail-note"
+        ></p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- PREVIOUS / NEXT -->
+    <section class="detail-navigation">
+
+      <button
+        id="detail-prev"
+        type="button"
+      >
+        ← PREVIOUS DAY
+      </button>
+
+      <button
+        id="detail-next"
+        type="button"
+      >
+        NEXT DAY →
+      </button>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <span>
+      ADHD
+    </span>
+
+    <span>
+      30 DAYS PROJECT · 2026
+    </span>
+
+  </footer>
+
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+
 </body>
+
 </html>
