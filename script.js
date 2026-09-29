@@ -2,71 +2,39 @@
    ELEMENTS
    ========================================== */
 
-const archivePage =
-  document.getElementById("archive-page");
+const archivePage = document.getElementById("archive-page");
+const detailPage = document.getElementById("detail-page");
 
-const detailPage =
-  document.getElementById("detail-page");
+const dayGrid = document.getElementById("day-grid");
 
-const dayGrid =
-  document.getElementById("day-grid");
+const dayNumber = document.getElementById("day-number");
+const dayDate = document.getElementById("day-date");
 
-const dayNumber =
-  document.getElementById("day-number");
+const imageBox = document.getElementById("image-box");
+const videoBox = document.getElementById("video-box");
 
-const dayDate =
-  document.getElementById("day-date");
+const currentCount = document.getElementById("current-count");
 
-const dayTitle =
-  document.getElementById("day-title");
+const imageDayLabel = document.getElementById("image-day-label");
+const videoDayLabel = document.getElementById("video-day-label");
 
-const imageBox =
-  document.getElementById("image-box");
+const detailsButton = document.getElementById("details-button");
+const detailsCardNumber = document.querySelector(".details-card-number");
 
-const videoBox =
-  document.getElementById("video-box");
+const backButton = document.getElementById("back-button");
 
-const currentCount =
-  document.getElementById("current-count");
+const detailDate = document.getElementById("detail-date");
+const detailDay = document.getElementById("detail-day");
+const detailTitle = document.getElementById("detail-title");
 
-const imageDayLabel =
-  document.getElementById("image-day-label");
+const detailDescription = document.getElementById("detail-description");
+const detailPrompt = document.getElementById("detail-prompt");
+const detailNote = document.getElementById("detail-note");
 
-const videoDayLabel =
-  document.getElementById("video-day-label");
+const copyButton = document.getElementById("copy-button");
 
-const detailsButton =
-  document.getElementById("details-button");
-
-const backButton =
-  document.getElementById("back-button");
-
-const detailDate =
-  document.getElementById("detail-date");
-
-const detailDay =
-  document.getElementById("detail-day");
-
-const detailTitle =
-  document.getElementById("detail-title");
-
-const detailDescription =
-  document.getElementById("detail-description");
-
-const detailPrompt =
-  document.getElementById("detail-prompt");
-
-const detailNote =
-  document.getElementById("detail-note");
-
-const copyButton =
-  document.getElementById("copy-button");
-
-const detailPrev =
-  document.getElementById("detail-prev");
-
-const detailNext =
-  document.getElementById("detail-next");
+const detailPrev = document.getElementById("detail-prev");
+const detailNext = document.getElementById("detail-next");
 
 
 let selectedDay = 1;
@@ -79,11 +47,9 @@ let selectedDay = 1;
 
 function pad(number) {
 
-  return String(number)
-    .padStart(2, "0");
+  return String(number).padStart(2, "0");
 
 }
-
 
 
 function getDay(number) {
@@ -95,18 +61,15 @@ function getDay(number) {
 }
 
 
-
 function hasContent(day) {
 
   if (!day) return false;
 
   return Boolean(
-
     day.title ||
     day.date ||
     day.image ||
     day.video
-
   );
 
 }
@@ -139,14 +102,10 @@ function getYoutubeID(url) {
 
   for (const pattern of patterns) {
 
-    const match =
-      url.match(pattern);
-
+    const match = url.match(pattern);
 
     if (match) {
-
       return match[1];
-
     }
 
   }
@@ -173,20 +132,13 @@ function createDayNavigation() {
       document.createElement("button");
 
 
-    button.type =
-      "button";
+    button.type = "button";
 
+    button.className = "day-button";
 
-    button.className =
-      "day-button";
+    button.textContent = pad(day.day);
 
-
-    button.textContent =
-      pad(day.day);
-
-
-    button.dataset.day =
-      day.day;
+    button.dataset.day = day.day;
 
 
     if (hasContent(day)) {
@@ -203,6 +155,7 @@ function createDayNavigation() {
       () => {
 
         showArchiveDay(day.day);
+
 
         history.replaceState(
           null,
@@ -236,8 +189,7 @@ function createDayNavigation() {
 
 function showArchiveDay(number) {
 
-  const day =
-    getDay(number);
+  const day = getDay(number);
 
 
   if (!day) {
@@ -245,12 +197,10 @@ function showArchiveDay(number) {
   }
 
 
-  selectedDay =
-    number;
+  selectedDay = number;
 
 
-  const formatted =
-    pad(number);
+  const formatted = pad(number);
 
 
 
@@ -295,8 +245,8 @@ function showArchiveDay(number) {
     day.date || "COMING SOON";
 
 
-  dayTitle.textContent =
-    day.title || "작업 기록 준비 중";
+  detailsCardNumber.textContent =
+    formatted;
 
 
 
@@ -388,8 +338,7 @@ function showArchiveDay(number) {
 
 function openDetails(number) {
 
-  const day =
-    getDay(number);
+  const day = getDay(number);
 
 
   if (!day) {
@@ -397,12 +346,10 @@ function openDetails(number) {
   }
 
 
-  selectedDay =
-    number;
+  selectedDay = number;
 
 
-  const formatted =
-    pad(number);
+  const formatted = pad(number);
 
 
   archivePage.classList.add(
@@ -424,7 +371,7 @@ function openDetails(number) {
 
 
   detailTitle.textContent =
-    day.title || "작업 기록 준비 중";
+    day.title || "작업 기록";
 
 
   detailDescription.textContent =
@@ -443,39 +390,12 @@ function openDetails(number) {
 
 
 
-  /* PREVIOUS */
-
-  if (number <= 1) {
-
-    detailPrev.disabled =
-      true;
-
-  }
-
-  else {
-
-    detailPrev.disabled =
-      false;
-
-  }
+  detailPrev.disabled =
+    number <= 1;
 
 
-
-  /* NEXT */
-
-  if (number >= 30) {
-
-    detailNext.disabled =
-      true;
-
-  }
-
-  else {
-
-    detailNext.disabled =
-      false;
-
-  }
+  detailNext.disabled =
+    number >= 30;
 
 
   history.replaceState(
@@ -487,7 +407,7 @@ function openDetails(number) {
 
   window.scrollTo({
     top: 0,
-    behavior: "instant"
+    behavior: "auto"
   });
 
 }
@@ -524,7 +444,7 @@ function closeDetails() {
 
   window.scrollTo({
     top: 0,
-    behavior: "instant"
+    behavior: "auto"
   });
 
 }
@@ -570,13 +490,11 @@ copyButton.addEventListener(
       getDay(selectedDay);
 
 
-    if (
-      !day ||
-      !day.prompt
-    ) {
+    if (!day || !day.prompt) {
 
       copyButton.textContent =
         "NO PROMPT";
+
 
       setTimeout(
         () => {
@@ -587,6 +505,7 @@ copyButton.addEventListener(
         },
         1200
       );
+
 
       return;
 
@@ -685,18 +604,14 @@ function startSite() {
   createDayNavigation();
 
 
-  const hash =
-    location.hash;
+  const hash = location.hash;
 
 
   const match =
-    hash.match(
-      /day-(\d+)/
-    );
+    hash.match(/day-(\d+)/);
 
 
-  let initialDay =
-    1;
+  let initialDay = 1;
 
 
   if (match) {
@@ -710,8 +625,7 @@ function startSite() {
       number <= 30
     ) {
 
-      initialDay =
-        number;
+      initialDay = number;
 
     }
 
@@ -720,9 +634,7 @@ function startSite() {
   else {
 
     const completed =
-      DAYS.filter(
-        hasContent
-      );
+      DAYS.filter(hasContent);
 
 
     if (completed.length) {
