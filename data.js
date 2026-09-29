@@ -1,444 +1,62 @@
-const DAYS = [
+const PROJECT = {
+  title: "A DOZEN HEAD DISTRACTIONS",
 
-  /* =========================================
-     DAY 01
-     ========================================= */
+  team: "10조",
+
+  members: [
+    "이청하",
+    "최도준",
+    "이유민"
+  ]
+};
+
+
+const DAYS = [
 
   {
     day: 1,
 
     date: "2026.09.28",
 
-    title: "",
-
-    image: "day1-character.png",
-
     video: "https://youtu.be/ehvclCeThqU?si=tW2yPpjOtClHBhgE",
 
-
-    /* 상세페이지 DESCRIPTION */
+    shortDescription:
+      "클레이 스타일의 캐릭터를 기반으로 첫 영상 생성 테스트를 진행하며 캐릭터의 형태와 색감, 장면 내 일관성을 확인했다.",
 
     description:
-      "ADHD 프로젝트의 메인 캐릭터를 설정하고, 캐릭터의 이미지와 움직임을 활용한 첫 AI 영상 생성 테스트를 진행했다.",
+      "프로젝트의 첫 영상 테스트를 진행했다. 캐릭터의 클레이 스타일과 전체적인 비주얼 톤을 실제 영상 장면에 적용하며 캐릭터의 형태, 색감, 표정이 장면 안에서 일관되게 유지되는지 확인했다.",
 
+    prompt:
+      "",
 
-    /* =========================================
-       DAY 01은 프롬프트 파일 사용
+    promptImage:
+      "day1-prompt-image.png",
 
-       GitHub에 day1-prompt.pdf 파일을
-       index.html과 같은 위치에 올리면 됩니다.
-
-       PDF가 아니라 txt 파일이어도 됩니다.
-       예: "day1-prompt.txt"
-       ========================================= */
-
-    promptFile: "day1-prompt.pdf",
-
-
-    /* promptFile이 있으면 아래 prompt는 표시되지 않음 */
-
-    prompt: "",
-
-
-    /* 상세페이지 NOTE */
+    promptFile:
+      "day1-prompt.pdf",
 
     note:
-      "캐릭터의 전체적인 이미지와 분위기를 테스트했다. 이후 작업에서는 장면이 바뀌어도 동일한 캐릭터의 외형과 스타일이 유지되도록 수정할 예정이다."
+      "첫 테스트를 통해 캐릭터의 기본적인 비주얼 방향을 확인했다. 이후 생성 과정에서는 캐릭터의 외형과 공간의 질감이 컷마다 크게 달라지지 않도록 일관성을 유지하는 것이 중요하다고 판단했다."
   },
 
-
-
-  /* =========================================
-     DAY 02
-     ========================================= */
 
   {
     day: 2,
 
     date: "",
 
-    title: "",
-
-    image: "",
-
     video: "",
+
+    shortDescription: "",
 
     description: "",
 
+    prompt: "",
 
-    /* 파일을 안 쓰는 날은 비워두기 */
+    promptImage: "",
 
     promptFile: "",
 
-
-    /* 프롬프트를 직접 입력 */
-
-    prompt: "",
-
-    note: ""
-  },
-
-
-  {
-    day: 3,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 4,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 5,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 6,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 7,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 8,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 9,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 10,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 11,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 12,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 13,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 14,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 15,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 16,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 17,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 18,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 19,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 20,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 21,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 22,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 23,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 24,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 25,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 26,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 27,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 28,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 29,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
-    note: ""
-  },
-
-
-  {
-    day: 30,
-    date: "",
-    title: "",
-    image: "",
-    video: "",
-    description: "",
-    promptFile: "",
-    prompt: "",
     note: ""
   }
 
