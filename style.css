@@ -1,35 +1,35 @@
 /* =========================================
-   COLORS / FONTS
+   COLORS
    ========================================= */
 
 :root {
 
   --paper: #f1eee6;
 
-  --black: #111111;
+  --black: #17191d;
 
-  --gray: #d9d5cc;
+  --gray: #d8d4cb;
 
-  --gray2: #aaa59b;
+  --gray2: #918f89;
 
-  --purple: #6038e8;
+  --blue: #35445c;
 
-  --red: #ff4d38;
+  --blue-dark: #293547;
+
+  --blue-light: #dce2e8;
+
+  --red: #c9584f;
 
 }
 
 
 * {
-
   box-sizing: border-box;
-
 }
 
 
 html {
-
   scroll-behavior: smooth;
-
 }
 
 
@@ -50,23 +50,17 @@ body {
 
 button,
 a {
-
   color: inherit;
-
 }
 
 
 button {
-
   font-family: inherit;
-
 }
 
 
 .hidden {
-
   display: none !important;
-
 }
 
 
@@ -77,11 +71,10 @@ button {
 
 .header {
 
-  height: 78px;
+  height: 74px;
 
   padding:
     0 3.5vw;
-
 
   display: flex;
 
@@ -89,27 +82,17 @@ button {
 
   justify-content: space-between;
 
-
   position: sticky;
 
   top: 0;
 
   z-index: 100;
 
-
   border-bottom:
-    1px solid
-    var(--black);
-
+    1px solid var(--black);
 
   background:
-    rgba(
-      241,
-      238,
-      230,
-      .96
-    );
-
+    rgba(241, 238, 230, .96);
 
   backdrop-filter:
     blur(10px);
@@ -123,21 +106,13 @@ button {
     "Big Shoulders Display",
     sans-serif;
 
+  font-size: 36px;
 
-  font-size:
-    40px;
+  font-weight: 900;
 
+  line-height: 1;
 
-  font-weight:
-    900;
-
-
-  line-height:
-    1;
-
-
-  text-decoration:
-    none;
+  text-decoration: none;
 
 }
 
@@ -148,17 +123,11 @@ button {
 
   gap: 28px;
 
+  font-size: 11px;
 
-  font-size:
-    11px;
+  font-weight: 700;
 
-
-  font-weight:
-    700;
-
-
-  letter-spacing:
-    .12em;
+  letter-spacing: .12em;
 
 }
 
@@ -170,13 +139,10 @@ button {
 
 .hero {
 
-  min-height:
-    600px;
-
+  min-height: 510px;
 
   padding:
-    38px 3.5vw 32px;
-
+    34px 3.5vw 30px;
 
   display: flex;
 
@@ -184,10 +150,8 @@ button {
 
   justify-content: space-between;
 
-
   border-bottom:
-    1px solid
-    var(--black);
+    1px solid var(--black);
 
 }
 
@@ -196,17 +160,11 @@ button {
 
   margin: 0;
 
+  font-size: 12px;
 
-  font-size:
-    13px;
+  font-weight: 700;
 
-
-  font-weight:
-    700;
-
-
-  letter-spacing:
-    .04em;
+  letter-spacing: .04em;
 
 }
 
@@ -219,13 +177,9 @@ button {
 
   justify-content: space-between;
 
+  gap: 30px;
 
-  gap:
-    30px;
-
-
-  margin-top:
-    25px;
+  margin-top: 20px;
 
 }
 
@@ -233,32 +187,25 @@ button {
 .hero h1 {
 
   margin:
-    0 0 -1.3vw;
-
+    0 0 -1vw;
 
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
-
+  /* 이전보다 작게 */
   font-size:
     clamp(
-      160px,
-      29vw,
-      470px
+      135px,
+      23vw,
+      360px
     );
 
+  font-weight: 900;
 
-  font-weight:
-    900;
+  line-height: .74;
 
-
-  line-height:
-    .72;
-
-
-  letter-spacing:
-    -.035em;
+  letter-spacing: -.03em;
 
 }
 
@@ -269,55 +216,42 @@ button {
 
   align-items: baseline;
 
-
-  padding-bottom:
-    1vw;
-
+  padding-bottom: 1vw;
 
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
-
   font-size:
     clamp(
-      45px,
-      6vw,
-      95px
+      40px,
+      5vw,
+      76px
     );
 
-
-  font-weight:
-    800;
+  font-weight: 800;
 
 }
 
 
 .counter #current-count {
-
-  color:
-    var(--purple);
-
+  color: var(--blue);
 }
 
 
 .counter .slash {
 
   margin:
-    0 10px;
+    0 9px;
 
-
-  color:
-    var(--gray2);
+  color: var(--gray2);
 
 }
 
 
 .hero-bottom {
 
-  padding-top:
-    22px;
-
+  padding-top: 19px;
 
   display: flex;
 
@@ -325,14 +259,10 @@ button {
 
   justify-content: space-between;
 
-
-  gap:
-    30px;
-
+  gap: 30px;
 
   border-top:
-    1px solid
-    var(--black);
+    1px solid var(--black);
 
 }
 
@@ -340,24 +270,17 @@ button {
 .project-name {
 
   margin:
-    0 0 5px;
-
+    0 0 4px;
 
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
+  font-size: 22px;
 
-  font-size:
-    25px;
+  font-weight: 800;
 
-
-  font-weight:
-    800;
-
-
-  letter-spacing:
-    .04em;
+  letter-spacing: .04em;
 
 }
 
@@ -366,13 +289,9 @@ button {
 
   margin: 0;
 
+  font-size: 13px;
 
-  font-size:
-    14px;
-
-
-  font-weight:
-    700;
+  font-weight: 700;
 
 }
 
@@ -381,17 +300,11 @@ button {
 
   margin: 0;
 
+  font-size: 10px;
 
-  font-size:
-    11px;
+  font-weight: 700;
 
-
-  font-weight:
-    700;
-
-
-  letter-spacing:
-    .12em;
+  letter-spacing: .12em;
 
 }
 
@@ -404,42 +317,27 @@ button {
 .featured {
 
   padding:
-    58px 3.5vw 75px;
+    55px 3.5vw 72px;
 
-
-  scroll-margin-top:
-    78px;
-
+  scroll-margin-top: 74px;
 
   border-bottom:
-    1px solid
-    var(--black);
+    1px solid var(--black);
 
 }
 
 
 .day-heading {
 
-  display: grid;
+  display: flex;
 
+  justify-content: space-between;
 
-  grid-template-columns:
-    minmax(
-      320px,
-      .8fr
-    )
-    1.2fr;
+  align-items: flex-end;
 
+  gap: 40px;
 
-  align-items: end;
-
-
-  gap:
-    50px;
-
-
-  margin-bottom:
-    38px;
+  margin-bottom: 34px;
 
 }
 
@@ -447,19 +345,13 @@ button {
 .mini-label {
 
   margin:
-    0 0 15px;
+    0 0 13px;
 
+  font-size: 9px;
 
-  font-size:
-    10px;
+  font-weight: 700;
 
-
-  font-weight:
-    700;
-
-
-  letter-spacing:
-    .15em;
+  letter-spacing: .16em;
 
 }
 
@@ -470,76 +362,62 @@ button {
     "Big Shoulders Display",
     sans-serif;
 
-
+  /* DAY 01 크기 축소 */
   font-size:
     clamp(
-      90px,
-      12vw,
-      180px
+      72px,
+      9vw,
+      135px
     );
 
+  font-weight: 900;
 
-  font-weight:
-    900;
+  line-height: .75;
 
-
-  line-height:
-    .72;
-
-
-  color:
-    var(--purple);
+  color: var(--blue);
 
 }
 
 
-.day-description {
+.day-date-area {
 
-  padding-bottom:
-    2px;
+  text-align: right;
+
+  padding-bottom: 2px;
+
+}
+
+
+.date-label {
+
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--gray2);
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: .15em;
 
 }
 
 
 .date {
 
-  margin:
-    0 0 8px;
-
-
-  font-size:
-    12px;
-
-
-  font-weight:
-    700;
-
-
-  letter-spacing:
-    .1em;
-
-}
-
-
-.day-description h2 {
-
-  max-width:
-    750px;
-
-
   margin: 0;
 
+  font-family:
+    "Big Shoulders Display",
+    sans-serif;
 
-  font-size:
-    clamp(
-      23px,
-      3vw,
-      43px
-    );
+  font-size: 22px;
 
+  font-weight: 800;
 
-  line-height:
-    1.25;
+  letter-spacing: .05em;
 
 }
 
@@ -553,33 +431,25 @@ button {
 
   display: grid;
 
-
   grid-template-columns:
     1fr 1fr;
 
-
-  gap:
-    12px;
+  gap: 12px;
 
 }
 
 
 .media-card {
-
   min-width: 0;
-
 }
 
 
 .media-top {
 
-  height:
-    42px;
-
+  height: 40px;
 
   padding:
     0 14px;
-
 
   display: flex;
 
@@ -587,30 +457,21 @@ button {
 
   justify-content: space-between;
 
-
   background:
     var(--black);
 
-
   color:
     white;
-
 
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
+  font-size: 15px;
 
-  font-size:
-    16px;
+  font-weight: 800;
 
-
-  font-weight:
-    800;
-
-
-  letter-spacing:
-    .1em;
+  letter-spacing: .1em;
 
 }
 
@@ -618,17 +479,12 @@ button {
 .image-box,
 .video-box {
 
-  width:
-    100%;
-
+  width: 100%;
 
   aspect-ratio:
     16 / 9;
 
-
-  overflow:
-    hidden;
-
+  overflow: hidden;
 
   background:
     #dedad0;
@@ -640,18 +496,11 @@ button {
 
   display: block;
 
+  width: 100%;
 
-  width:
-    100%;
+  height: 100%;
 
-
-  height:
-    100%;
-
-
-  object-fit:
-    contain;
-
+  object-fit: contain;
 
   background:
     #dedad0;
@@ -663,30 +512,23 @@ button {
 
   display: block;
 
+  width: 100%;
 
-  width:
-    100%;
+  height: 100%;
 
-
-  height:
-    100%;
-
-
-  border:
-    0;
+  border: 0;
 
 }
 
 
+
+/* EMPTY */
+
 .empty {
 
-  width:
-    100%;
+  width: 100%;
 
-
-  height:
-    100%;
-
+  height: 100%;
 
   display: flex;
 
@@ -695,7 +537,6 @@ button {
   align-items: center;
 
   justify-content: center;
-
 
   color:
     #817d74;
@@ -709,21 +550,16 @@ button {
     "Big Shoulders Display",
     sans-serif;
 
-
   font-size:
     clamp(
-      70px,
-      10vw,
-      150px
+      60px,
+      8vw,
+      120px
     );
 
+  font-weight: 900;
 
-  font-weight:
-    900;
-
-
-  line-height:
-    .8;
+  line-height: .8;
 
 }
 
@@ -733,18 +569,13 @@ button {
   margin:
     15px 0 0;
 
-
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
+  font-weight: 800;
 
-  font-weight:
-    800;
-
-
-  letter-spacing:
-    .12em;
+  letter-spacing: .12em;
 
 }
 
@@ -752,108 +583,177 @@ button {
 .empty.dark {
 
   background:
-    #171717;
-
+    #17191d;
 
   color:
-    #696969;
+    #666c75;
 
 }
 
 
 
 /* =========================================
-   VIEW DETAILS
+   VIEW DETAILS CARD
    ========================================= */
 
-.details-link-wrap {
+.details-card {
 
-  margin-top:
-    18px;
+  width: 100%;
+
+  margin-top: 22px;
+
+  padding:
+    24px 26px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border:
+    1px solid var(--blue);
+
+  background:
+    var(--blue-light);
+
+  color:
+    var(--blue-dark);
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    transform .2s ease;
 
 }
 
 
-.details-button {
-
-  width:
-    100%;
-
-
-  padding:
-    21px 0;
-
+.details-card-left {
 
   display: flex;
 
-  justify-content: space-between;
+  flex-direction: column;
+
+  align-items: flex-start;
+
+}
+
+
+.details-kicker {
+
+  margin-bottom: 7px;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: .17em;
+
+  opacity: .7;
+
+}
+
+
+/* 화살표를 VIEW DETAILS 바로 옆에 항상 표시 */
+
+.details-main-link {
+
+  display: inline-flex;
 
   align-items: center;
 
-
-  border:
-    0;
-
-
-  border-top:
-    1px solid
-    var(--black);
-
-
-  border-bottom:
-    1px solid
-    var(--black);
-
-
-  background:
-    transparent;
-
-
-  cursor:
-    pointer;
-
+  gap: 10px;
 
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
-
   font-size:
-    25px;
+    clamp(
+      27px,
+      3vw,
+      40px
+    );
 
+  font-weight: 900;
 
-  font-weight:
-    800;
+  line-height: 1;
 
-
-  letter-spacing:
-    .08em;
-
-
-  transition:
-    padding .2s ease,
-    background .2s ease,
-    color .2s ease;
+  letter-spacing: .03em;
 
 }
 
 
-.details-button:hover {
+.details-arrow {
 
-  padding-left:
-    18px;
+  display: inline-block;
+
+  font-size: .95em;
+
+  transition:
+    transform .2s ease;
+
+}
 
 
-  padding-right:
-    18px;
+.details-description {
 
+  margin-top: 10px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: .12em;
+
+  opacity: .7;
+
+}
+
+
+.details-card-number {
+
+  font-family:
+    "Big Shoulders Display",
+    sans-serif;
+
+  font-size:
+    54px;
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  opacity: .16;
+
+}
+
+
+/* hover도 쨍하지 않게 */
+
+.details-card:hover {
 
   background:
-    var(--purple);
-
+    var(--blue);
 
   color:
     white;
+
+  transform:
+    translateY(-2px);
+
+}
+
+
+.details-card:hover
+.details-arrow {
+
+  transform:
+    translateX(6px);
 
 }
 
@@ -866,21 +766,17 @@ button {
 .days {
 
   padding:
-    75px 3.5vw 90px;
-
+    70px 3.5vw 88px;
 
   border-bottom:
-    1px solid
-    var(--black);
+    1px solid var(--black);
 
 }
 
 
 .days-heading {
 
-  margin-bottom:
-    32px;
-
+  margin-bottom: 30px;
 
   display: flex;
 
@@ -895,26 +791,20 @@ button {
 
   margin: 0;
 
-
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
-
   font-size:
     clamp(
-      80px,
-      11vw,
-      165px
+      70px,
+      9vw,
+      135px
     );
 
+  font-weight: 900;
 
-  font-weight:
-    900;
-
-
-  line-height:
-    .75;
+  line-height: .75;
 
 }
 
@@ -923,17 +813,11 @@ button {
 
   margin: 0;
 
+  font-size: 10px;
 
-  font-size:
-    11px;
+  font-weight: 700;
 
-
-  font-weight:
-    700;
-
-
-  letter-spacing:
-    .15em;
+  letter-spacing: .15em;
 
 }
 
@@ -942,22 +826,17 @@ button {
 
   display: grid;
 
-
   grid-template-columns:
     repeat(
       10,
       1fr
     );
 
-
   border-top:
-    1px solid
-    var(--black);
-
+    1px solid var(--black);
 
   border-left:
-    1px solid
-    var(--black);
+    1px solid var(--black);
 
 }
 
@@ -967,49 +846,34 @@ button {
   aspect-ratio:
     1 / 1;
 
-
-  border:
-    0;
-
+  border: 0;
 
   border-right:
-    1px solid
-    var(--black);
-
+    1px solid var(--black);
 
   border-bottom:
-    1px solid
-    var(--black);
-
+    1px solid var(--black);
 
   background:
     transparent;
 
-
   color:
     #aaa59b;
 
-
-  cursor:
-    pointer;
-
+  cursor: pointer;
 
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
-
   font-size:
     clamp(
-      25px,
-      3.3vw,
-      55px
+      23px,
+      3vw,
+      48px
     );
 
-
-  font-weight:
-    800;
-
+  font-weight: 800;
 
   transition:
     background .18s ease,
@@ -1023,7 +887,6 @@ button {
   background:
     var(--black);
 
-
   color:
     white;
 
@@ -1031,10 +894,7 @@ button {
 
 
 .day-button.available {
-
-  color:
-    var(--black);
-
+  color: var(--black);
 }
 
 
@@ -1042,25 +902,16 @@ button {
 
   content: "";
 
-
   display: block;
 
+  width: 6px;
 
-  width:
-    7px;
-
-
-  height:
-    7px;
-
+  height: 6px;
 
   margin:
     5px auto 0;
 
-
-  border-radius:
-    50%;
-
+  border-radius: 50%;
 
   background:
     var(--red);
@@ -1071,8 +922,7 @@ button {
 .day-button.active {
 
   background:
-    var(--purple);
-
+    var(--blue);
 
   color:
     white;
@@ -1081,10 +931,7 @@ button {
 
 
 .day-button.active::after {
-
-  background:
-    white;
-
+  background: white;
 }
 
 
@@ -1096,12 +943,10 @@ button {
 .project-footer {
 
   min-height:
-    470px;
-
+    430px;
 
   padding:
-    75px 3.5vw;
-
+    70px 3.5vw;
 
   display: flex;
 
@@ -1109,9 +954,7 @@ button {
 
   justify-content: space-between;
 
-
-  gap:
-    50px;
+  gap: 50px;
 
 }
 
@@ -1120,21 +963,13 @@ button {
 
   display: block;
 
+  margin-bottom: 18px;
 
-  margin-bottom:
-    18px;
+  font-size: 10px;
 
+  font-weight: 700;
 
-  font-size:
-    11px;
-
-
-  font-weight:
-    700;
-
-
-  letter-spacing:
-    .15em;
+  letter-spacing: .15em;
 
 }
 
@@ -1143,42 +978,31 @@ button {
 
   margin: 0;
 
-
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
-
   font-size:
     clamp(
-      70px,
-      10vw,
-      150px
+      60px,
+      8vw,
+      120px
     );
 
+  font-weight: 900;
 
-  font-weight:
-    900;
-
-
-  line-height:
-    .75;
+  line-height: .78;
 
 }
 
 
 .footer-info {
 
-  text-align:
-    right;
+  text-align: right;
 
+  font-size: 12px;
 
-  font-size:
-    13px;
-
-
-  font-weight:
-    700;
+  font-weight: 700;
 
 }
 
@@ -1193,7 +1017,7 @@ button {
 
 
 /* =========================================
-   DETAIL PAGE
+   DETAIL PAGE HERO
    ========================================= */
 
 .detail-page {
@@ -1207,12 +1031,10 @@ button {
 .detail-hero {
 
   min-height:
-    580px;
-
+    510px;
 
   padding:
-    45px 3.5vw 55px;
-
+    42px 3.5vw 50px;
 
   display: flex;
 
@@ -1220,13 +1042,12 @@ button {
 
   justify-content: space-between;
 
-
+  /* 쨍한 보라색 대신 차분한 네이비 */
   background:
-    var(--purple);
-
+    var(--blue-dark);
 
   color:
-    white;
+    #f4f1e9;
 
 }
 
@@ -1236,47 +1057,32 @@ button {
   align-self:
     flex-start;
 
-
   padding:
     10px 0;
 
-
-  border:
-    0;
-
+  border: 0;
 
   border-bottom:
-    1px solid
-    white;
-
+    1px solid #f4f1e9;
 
   background:
     transparent;
 
-
   color:
-    white;
-
+    #f4f1e9;
 
   cursor:
     pointer;
-
 
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
+  font-size: 17px;
 
-  font-size:
-    18px;
+  font-weight: 800;
 
-
-  font-weight:
-    800;
-
-
-  letter-spacing:
-    .08em;
+  letter-spacing: .08em;
 
 }
 
@@ -1285,14 +1091,10 @@ button {
 
   display: grid;
 
-
   grid-template-columns:
     1fr 1fr;
 
-
-  gap:
-    60px;
-
+  gap: 60px;
 
   align-items: end;
 
@@ -1302,19 +1104,13 @@ button {
 .detail-date {
 
   margin:
-    0 0 15px;
+    0 0 14px;
 
+  font-size: 11px;
 
-  font-size:
-    12px;
+  font-weight: 700;
 
-
-  font-weight:
-    700;
-
-
-  letter-spacing:
-    .12em;
+  letter-spacing: .12em;
 
 }
 
@@ -1323,34 +1119,27 @@ button {
 
   margin: 0;
 
-
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
-
   font-size:
     clamp(
-      120px,
-      17vw,
-      270px
+      95px,
+      14vw,
+      215px
     );
 
+  font-weight: 900;
 
-  font-weight:
-    900;
-
-
-  line-height:
-    .7;
+  line-height: .72;
 
 }
 
 
 .detail-title-box {
 
-  padding-bottom:
-    5px;
+  padding-bottom: 4px;
 
 }
 
@@ -1360,17 +1149,11 @@ button {
   margin:
     0 0 10px;
 
+  font-size: 10px;
 
-  font-size:
-    11px;
+  font-weight: 700;
 
-
-  font-weight:
-    700;
-
-
-  letter-spacing:
-    .15em;
+  letter-spacing: .15em;
 
 }
 
@@ -1380,20 +1163,16 @@ button {
   max-width:
     700px;
 
-
   margin: 0;
-
 
   font-size:
     clamp(
-      30px,
-      4vw,
-      60px
+      26px,
+      3.4vw,
+      50px
     );
 
-
-  line-height:
-    1.15;
+  line-height: 1.2;
 
 }
 
@@ -1407,22 +1186,16 @@ button {
 
   display: grid;
 
-
   grid-template-columns:
-    160px 1fr;
+    130px 1fr;
 
-
-  gap:
-    40px;
-
+  gap: 40px;
 
   padding:
-    75px 3.5vw;
-
+    68px 3.5vw;
 
   border-bottom:
-    1px solid
-    var(--black);
+    1px solid var(--black);
 
 }
 
@@ -1433,17 +1206,12 @@ button {
     "Big Shoulders Display",
     sans-serif;
 
+  font-size: 48px;
 
-  font-size:
-    55px;
-
-
-  font-weight:
-    900;
-
+  font-weight: 900;
 
   color:
-    var(--purple);
+    var(--blue);
 
 }
 
@@ -1459,33 +1227,23 @@ button {
 .section-name {
 
   margin:
-    0 0 30px;
-
+    0 0 28px;
 
   padding-bottom:
     12px;
 
-
   border-bottom:
-    1px solid
-    var(--black);
-
+    1px solid var(--black);
 
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
+  font-size: 24px;
 
-  font-size:
-    26px;
+  font-weight: 800;
 
-
-  font-weight:
-    800;
-
-
-  letter-spacing:
-    .1em;
+  letter-spacing: .1em;
 
 }
 
@@ -1495,21 +1253,16 @@ button {
   max-width:
     900px;
 
-
   margin: 0;
-
 
   font-size:
     clamp(
-      18px,
-      2vw,
-      27px
+      17px,
+      1.8vw,
+      24px
     );
 
-
-  line-height:
-    1.8;
-
+  line-height: 1.8;
 
   white-space:
     pre-line;
@@ -1524,17 +1277,12 @@ button {
 
 .prompt-box {
 
-  position:
-    relative;
+  position: relative;
 
-
-  padding:
-    35px;
-
+  padding: 34px;
 
   background:
     var(--black);
-
 
   color:
     white;
@@ -1545,32 +1293,24 @@ button {
 .prompt-box pre {
 
   min-height:
-    180px;
-
+    170px;
 
   margin:
-    0 0 40px;
-
+    0 0 38px;
 
   white-space:
     pre-wrap;
 
-
   word-break:
     break-word;
-
 
   font-family:
     "Noto Sans KR",
     sans-serif;
 
+  font-size: 14px;
 
-  font-size:
-    15px;
-
-
-  line-height:
-    1.8;
+  line-height: 1.8;
 
 }
 
@@ -1578,41 +1318,29 @@ button {
 .copy-button {
 
   padding:
-    11px 17px;
-
+    10px 16px;
 
   border:
-    1px solid
-    white;
-
+    1px solid white;
 
   background:
     transparent;
 
-
   color:
     white;
 
-
   cursor:
     pointer;
-
 
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
+  font-size: 15px;
 
-  font-size:
-    16px;
+  font-weight: 800;
 
-
-  font-weight:
-    800;
-
-
-  letter-spacing:
-    .08em;
+  letter-spacing: .08em;
 
 }
 
@@ -1621,7 +1349,6 @@ button {
 
   background:
     white;
-
 
   color:
     var(--black);
@@ -1638,7 +1365,6 @@ button {
 
   display: grid;
 
-
   grid-template-columns:
     1fr 1fr;
 
@@ -1648,70 +1374,54 @@ button {
 .detail-navigation button {
 
   min-height:
-    150px;
-
+    135px;
 
   padding:
     30px 3.5vw;
 
-
-  border:
-    0;
-
+  border: 0;
 
   background:
     var(--paper);
 
-
-  cursor:
-    pointer;
-
+  cursor: pointer;
 
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
-
   font-size:
     clamp(
-      25px,
-      3vw,
-      45px
+      23px,
+      2.6vw,
+      38px
     );
 
-
-  font-weight:
-    800;
+  font-weight: 800;
 
 }
 
 
 .detail-navigation button:first-child {
 
-  text-align:
-    left;
-
+  text-align: left;
 
   border-right:
-    1px solid
-    var(--black);
+    1px solid var(--black);
 
 }
 
 
 .detail-navigation button:last-child {
-
-  text-align:
-    right;
-
+  text-align: right;
 }
 
 
-.detail-navigation button:hover:not(:disabled) {
+.detail-navigation
+button:hover:not(:disabled) {
 
   background:
-    var(--purple);
-
+    var(--blue);
 
   color:
     white;
@@ -1719,14 +1429,12 @@ button {
 }
 
 
-.detail-navigation button:disabled {
+.detail-navigation
+button:disabled {
 
-  opacity:
-    .25;
+  opacity: .25;
 
-
-  cursor:
-    default;
+  cursor: default;
 
 }
 
@@ -1739,12 +1447,10 @@ button {
 footer {
 
   min-height:
-    70px;
-
+    68px;
 
   padding:
     0 3.5vw;
-
 
   display: flex;
 
@@ -1752,26 +1458,19 @@ footer {
 
   justify-content: space-between;
 
-
   background:
     var(--black);
 
-
   color:
     white;
-
 
   font-family:
     "Big Shoulders Display",
     sans-serif;
 
+  font-weight: 800;
 
-  font-weight:
-    800;
-
-
-  letter-spacing:
-    .1em;
+  letter-spacing: .1em;
 
 }
 
@@ -1786,40 +1485,19 @@ footer {
 ) {
 
   .hero {
-
-    min-height:
-      500px;
-
-  }
-
-
-  .day-heading {
-
-    grid-template-columns:
-      1fr;
-
-
-    gap:
-      30px;
-
+    min-height: 460px;
   }
 
 
   .media-grid {
-
-    grid-template-columns:
-      1fr;
-
+    grid-template-columns: 1fr;
   }
 
 
   .day-grid {
 
     grid-template-columns:
-      repeat(
-        6,
-        1fr
-      );
+      repeat(6, 1fr);
 
   }
 
@@ -1828,21 +1506,16 @@ footer {
 
     display: block;
 
-
-    min-height:
-      auto;
+    min-height: auto;
 
   }
 
 
   .footer-info {
 
-    margin-top:
-      70px;
+    margin-top: 65px;
 
-
-    text-align:
-      left;
+    text-align: left;
 
   }
 
@@ -1852,9 +1525,7 @@ footer {
     grid-template-columns:
       1fr;
 
-
-    gap:
-      60px;
+    gap: 55px;
 
   }
 
@@ -1862,7 +1533,7 @@ footer {
   .detail-section {
 
     grid-template-columns:
-      100px 1fr;
+      90px 1fr;
 
   }
 
@@ -1880,9 +1551,7 @@ footer {
 
   .header {
 
-    height:
-      64px;
-
+    height: 62px;
 
     padding:
       0 18px;
@@ -1891,80 +1560,63 @@ footer {
 
 
   .logo {
-
-    font-size:
-      32px;
-
+    font-size: 30px;
   }
 
 
-  .header-right span:first-child {
+  .header-right
+  span:first-child {
 
-    display:
-      none;
+    display: none;
 
   }
 
 
   .hero {
 
-    min-height:
-      450px;
-
+    min-height: 400px;
 
     padding:
-      25px 18px;
+      24px 18px;
 
   }
 
 
   .school {
-
-    font-size:
-      11px;
-
+    font-size: 10px;
   }
 
 
   .hero-title {
-
     display: block;
-
   }
 
 
   .hero h1 {
 
-    margin-top:
-      40px;
+    margin-top: 35px;
 
-
-    font-size:
-      42vw;
+    font-size: 35vw;
 
   }
 
 
   .counter {
 
-    margin-top:
-      45px;
+    margin-top: 38px;
+
+    font-size: 48px;
 
   }
 
 
   .hero-bottom {
-
     display: block;
-
   }
 
 
   .archive-label {
-
-    margin-top:
-      18px;
-
+    margin-top: 16px;
   }
 
 
@@ -1972,12 +1624,25 @@ footer {
   .days,
   .project-footer {
 
-    padding-left:
-      18px;
+    padding-left: 18px;
+
+    padding-right: 18px;
+
+  }
 
 
-    padding-right:
-      18px;
+  .day-heading {
+
+    display: block;
+
+  }
+
+
+  .day-date-area {
+
+    margin-top: 28px;
+
+    text-align: left;
 
   }
 
@@ -1985,39 +1650,41 @@ footer {
   .day-grid {
 
     grid-template-columns:
-      repeat(
-        5,
-        1fr
-      );
+      repeat(5, 1fr);
 
   }
 
 
   .day-button {
+    font-size: 28px;
+  }
 
-    font-size:
-      30px;
 
+  .details-card {
+
+    padding:
+      20px;
+
+  }
+
+
+  .details-card-number {
+    font-size: 42px;
   }
 
 
   .detail-hero {
 
-    min-height:
-      520px;
-
+    min-height: 470px;
 
     padding:
-      30px 18px;
+      28px 18px;
 
   }
 
 
   .detail-day {
-
-    font-size:
-      34vw;
-
+    font-size: 29vw;
   }
 
 
@@ -2025,30 +1692,23 @@ footer {
 
     display: block;
 
-
     padding:
-      50px 18px;
+      48px 18px;
 
   }
 
 
   .detail-label {
 
-    margin-bottom:
-      25px;
+    margin-bottom: 22px;
 
-
-    font-size:
-      38px;
+    font-size: 35px;
 
   }
 
 
   .prompt-box {
-
-    padding:
-      24px;
-
+    padding: 22px;
   }
 
 
@@ -2060,15 +1720,13 @@ footer {
   }
 
 
-  .detail-navigation button:first-child {
+  .detail-navigation
+  button:first-child {
 
-    border-right:
-      0;
-
+    border-right: 0;
 
     border-bottom:
-      1px solid
-      var(--black);
+      1px solid var(--black);
 
   }
 
@@ -2078,9 +1736,7 @@ footer {
     padding:
       0 18px;
 
-
-    font-size:
-      12px;
+    font-size: 11px;
 
   }
 
