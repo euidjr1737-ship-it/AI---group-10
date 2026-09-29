@@ -36,9 +36,9 @@
   </header>
 
 
-  <!-- =========================
+  <!-- =====================================================
        MAIN ARCHIVE
-       ========================= -->
+       ===================================================== -->
 
   <main id="archive-page">
 
@@ -97,7 +97,10 @@
     </section>
 
 
-    <!-- SELECTED DAY -->
+    <!-- =====================================================
+         SELECTED DAY
+         ===================================================== -->
+
     <section class="featured">
 
       <div class="day-heading">
@@ -118,7 +121,12 @@
         </div>
 
 
-        <div class="day-description">
+        <!-- 제목은 메인에서 제거하고 날짜만 표시 -->
+        <div class="day-date-area">
+
+          <span class="date-label">
+            DATE
+          </span>
 
           <p
             class="date"
@@ -126,10 +134,6 @@
           >
             2026.09.28
           </p>
-
-          <h2 id="day-title">
-            캐릭터 디자인 및 AI 영상 테스트
-          </h2>
 
         </div>
 
@@ -153,6 +157,7 @@
 
           </div>
 
+
           <div
             class="image-box"
             id="image-box"
@@ -175,6 +180,7 @@
 
           </div>
 
+
           <div
             class="video-box"
             id="video-box"
@@ -185,31 +191,48 @@
       </div>
 
 
-      <!-- DETAILS BUTTON -->
-      <div class="details-link-wrap">
+      <!-- =================================================
+           DETAIL LINK
+           ================================================= -->
 
-        <button
-          class="details-button"
-          id="details-button"
-          type="button"
-        >
+      <button
+        class="details-card"
+        id="details-button"
+        type="button"
+        aria-label="상세 제작 기록 보기"
+      >
 
-          <span>
-            VIEW DETAILS
+        <div class="details-card-left">
+
+          <span class="details-kicker">
+            PROCESS ARCHIVE
           </span>
 
-          <span>
-            →
+          <div class="details-main-link">
+            VIEW DETAILS <span class="details-arrow">→</span>
+          </div>
+
+          <span class="details-description">
+            DESCRIPTION · PROMPT · NOTE
           </span>
 
-        </button>
+        </div>
 
-      </div>
+
+        <div class="details-card-number">
+          01
+        </div>
+
+      </button>
 
     </section>
 
 
-    <!-- 30 DAYS -->
+
+    <!-- =====================================================
+         30 DAYS
+         ===================================================== -->
+
     <section class="days">
 
       <div class="days-heading">
@@ -233,7 +256,11 @@
     </section>
 
 
-    <!-- BOTTOM PROJECT TITLE -->
+
+    <!-- =====================================================
+         PROJECT FOOTER
+         ===================================================== -->
+
     <section class="project-footer">
 
       <div>
@@ -272,15 +299,16 @@
 
 
 
-  <!-- =========================
+  <!-- =====================================================
        DETAIL PAGE
-       ========================= -->
+       ===================================================== -->
 
   <main
     id="detail-page"
     class="detail-page hidden"
   >
 
+    <!-- DETAIL HERO -->
     <section class="detail-hero">
 
       <button
@@ -369,7 +397,6 @@
 
           <pre id="detail-prompt"></pre>
 
-
           <button
             class="copy-button"
             id="copy-button"
@@ -409,6 +436,8 @@
     </section>
 
 
+
+    <!-- PREV / NEXT -->
     <section class="detail-navigation">
 
       <button
@@ -431,6 +460,7 @@
 
 
 
+  <!-- FOOTER -->
   <footer>
 
     <span>
