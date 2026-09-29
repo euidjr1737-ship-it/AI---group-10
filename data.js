@@ -46,27 +46,25 @@ const projectDays = [
      DAY 02
      작업하면 uploaded: true 로 변경
   ====================================================== */
+{
+  day: 2,
 
-  {
-    day: 2,
+  date: "2026.09.29",
 
-    date: "",
+  title: "Day 02",
 
-    title: "Day 02",
+  uploaded: true,
 
-    uploaded: false,
+  youtubeId: "yj5tk5_3hyc",
 
-    youtubeId: "",
+  description: "",
 
-    description: "",
+  prompt: "",
 
-    prompt: "",
+  promptFile: "",
 
-    promptFile: "",
-
-    note: ""
-  },
-
+  note: ""
+},
 
   /* =====================================================
      DAY 03
