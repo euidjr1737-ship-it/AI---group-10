@@ -1,0 +1,729 @@
+<!doctype html>
+
+<html lang="ko">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1"
+>
+
+<title>
+  Character Sheet | A Dozen Head Distractions
+</title>
+
+
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+>
+
+<link
+  rel="stylesheet"
+  href="style.css"
+>
+
+
+<style>
+
+/* ============================================================
+   CHARACTER PAGE
+   ============================================================ */
+
+.character-page {
+
+  padding:
+    100px 6vw 140px;
+
+}
+
+
+.character-page-head {
+
+  min-height: 55vh;
+
+  display: grid;
+
+  grid-template-columns:
+    1.1fr .9fr;
+
+  gap: 8vw;
+
+  align-items: center;
+
+}
+
+
+.character-page-title span {
+
+  color: var(--terracotta-dark);
+
+  font-family:
+    "Big Shoulders Display",
+    sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  letter-spacing: .15em;
+
+}
+
+
+.character-page-title h1 {
+
+  margin:
+    17px 0 0;
+
+  font-family:
+    "Big Shoulders Display",
+    sans-serif;
+
+  font-size:
+    clamp(80px, 11vw, 160px);
+
+  font-weight: 800;
+
+  line-height: .76;
+
+  letter-spacing: -.035em;
+
+}
+
+
+.character-page-intro {
+
+  max-width: 500px;
+
+}
+
+
+.character-page-intro::before {
+
+  content: "";
+
+  width: 46px;
+
+  height: 7px;
+
+  margin-bottom: 27px;
+
+  display: block;
+
+  background: var(--purple);
+
+  border-radius:
+    50% 45% 60% 40%;
+
+  transform: rotate(-3deg);
+
+}
+
+
+.character-page-intro p {
+
+  margin: 0;
+
+  color: var(--brown-2);
+
+  font-size: 13px;
+
+  line-height: 1.95;
+
+  word-break: keep-all;
+
+}
+
+
+.character-page-intro p + p {
+
+  margin-top: 15px;
+
+}
+
+
+
+/* GRID */
+
+.character-grid {
+
+  margin-top: 80px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 26px;
+
+}
+
+
+.character-card {
+
+  margin: 0;
+
+  overflow: hidden;
+
+  cursor: zoom-in;
+
+  background: var(--paper);
+
+  border:
+    1px solid var(--line);
+
+  border-radius:
+    18px 14px 21px 15px;
+
+  box-shadow:
+    var(--soft-shadow);
+
+}
+
+
+.character-card:nth-child(1),
+.character-card:nth-child(4),
+.character-card:nth-child(7) {
+
+  grid-column:
+    1 / -1;
+
+}
+
+
+.character-image {
+
+  overflow: hidden;
+
+  background: var(--cream-2);
+
+}
+
+
+.character-image img {
+
+  width: 100%;
+
+  transition:
+    transform .4s ease;
+
+}
+
+
+.character-card:hover
+.character-image img {
+
+  transform:
+    scale(1.015);
+
+}
+
+
+.character-caption {
+
+  min-height: 58px;
+
+  padding:
+    0 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  font-family:
+    "Big Shoulders Display",
+    sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  letter-spacing: .1em;
+
+}
+
+
+.character-caption
+span:last-child {
+
+  color:
+    var(--terracotta-dark);
+
+}
+
+
+
+/* LIGHTBOX */
+
+.lightbox {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 200;
+
+  padding: 30px;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background:
+    rgba(35, 25, 21, .92);
+
+  backdrop-filter:
+    blur(12px);
+
+}
+
+
+.lightbox.open {
+
+  display: flex;
+
+}
+
+
+.lightbox img {
+
+  max-width: 95vw;
+
+  max-height: 90vh;
+
+  object-fit: contain;
+
+  border-radius: 10px;
+
+}
+
+
+.lightbox-close {
+
+  width: 48px;
+
+  height: 48px;
+
+  position: fixed;
+
+  right: 25px;
+
+  top: 20px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.35);
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 30px;
+
+  line-height: 1;
+
+}
+
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+  .character-page {
+
+    padding:
+      70px 20px 100px;
+
+  }
+
+
+  .character-page-head {
+
+    min-height: auto;
+
+    display: block;
+
+  }
+
+
+  .character-page-title h1 {
+
+    font-size:
+      clamp(70px, 22vw, 110px);
+
+  }
+
+
+  .character-page-intro {
+
+    margin-top: 80px;
+
+  }
+
+
+  .character-grid {
+
+    margin-top: 70px;
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .character-card:nth-child(n) {
+
+    grid-column: auto;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+<header class="topbar">
+
+  <a
+    class="brand"
+    href="index.html"
+  >
+    ADHD
+  </a>
+
+
+  <nav>
+
+    <a href="index.html#project">
+      PROJECT
+    </a>
+
+    <a href="index.html#archive">
+      30 DAYS
+    </a>
+
+    <a href="character.html">
+      CHARACTER SHEET
+    </a>
+
+  </nav>
+
+</header>
+
+
+
+<main class="character-page">
+
+
+  <section class="character-page-head">
+
+
+    <div class="character-page-title">
+
+      <span>
+        VISUAL ARCHIVE · 01—07
+      </span>
+
+      <h1>
+        CHARACTER<br>
+        SHEET
+      </h1>
+
+    </div>
+
+
+
+    <div class="character-page-intro">
+
+      <p>
+        Characters developed for
+        <strong>A Dozen Head Distractions.</strong>
+      </p>
+
+      <p>
+        작품에 등장하는 캐릭터의 형태,
+        표정, 의상과 디테일을 정리한
+        비주얼 아카이브입니다.
+      </p>
+
+    </div>
+
+
+  </section>
+
+
+
+  <section
+    class="character-grid"
+    id="character-grid"
+  ></section>
+
+
+</main>
+
+
+
+<footer>
+
+  <div>
+    A DOZEN HEAD DISTRACTIONS
+  </div>
+
+  <div>
+    CHARACTER ARCHIVE · 2026
+  </div>
+
+</footer>
+
+
+
+<div
+  class="lightbox"
+  id="lightbox"
+>
+
+  <button
+    class="lightbox-close"
+    id="lightbox-close"
+    aria-label="close"
+  >
+    ×
+  </button>
+
+
+  <img
+    id="lightbox-image"
+    src=""
+    alt=""
+  >
+
+</div>
+
+
+
+<script>
+
+/* ============================================================
+   CHARACTER IMAGES
+
+   GitHub에 아래 이름 그대로 올리면 됩니다.
+
+   character-01.png
+   character-02.png
+   ...
+   character-07.png
+   ============================================================ */
+
+
+const CHARACTER_IMAGES = [
+
+  "character-01.png",
+
+  "character-02.png",
+
+  "character-03.png",
+
+  "character-04.png",
+
+  "character-05.png",
+
+  "character-06.png",
+
+  "character-07.png"
+
+];
+
+
+
+const grid =
+  document.querySelector(
+    "#character-grid"
+  );
+
+
+
+grid.innerHTML =
+
+  CHARACTER_IMAGES
+
+    .map(
+      (image, index) => `
+
+        <figure
+          class="character-card"
+          data-character-image="${image}"
+        >
+
+          <div class="character-image">
+
+            <img
+              src="${image}"
+              alt="Character sheet ${index + 1}"
+              loading="lazy"
+            >
+
+          </div>
+
+
+          <figcaption
+            class="character-caption"
+          >
+
+            <span>
+              CHARACTER ${String(
+                index + 1
+              ).padStart(2, "0")}
+            </span>
+
+            <span>
+              VIEW ↗
+            </span>
+
+          </figcaption>
+
+        </figure>
+
+      `
+    )
+
+    .join("");
+
+
+
+const lightbox =
+  document.querySelector(
+    "#lightbox"
+  );
+
+
+const lightboxImage =
+  document.querySelector(
+    "#lightbox-image"
+  );
+
+
+
+document
+  .querySelectorAll(
+    "[data-character-image]"
+  )
+  .forEach(card => {
+
+    card.addEventListener(
+      "click",
+      () => {
+
+        lightboxImage.src =
+          card.dataset.characterImage;
+
+
+        lightbox.classList.add(
+          "open"
+        );
+
+
+        document.body.style.overflow =
+          "hidden";
+
+      }
+    );
+
+  });
+
+
+
+function closeLightbox() {
+
+  lightbox.classList.remove(
+    "open"
+  );
+
+
+  lightboxImage.src = "";
+
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+
+document
+  .querySelector(
+    "#lightbox-close"
+  )
+  .addEventListener(
+    "click",
+    closeLightbox
+  );
+
+
+
+lightbox.addEventListener(
+  "click",
+  event => {
+
+    if (
+      event.target === lightbox
+    ) {
+
+      closeLightbox();
+
+    }
+
+  }
+);
+
+
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Escape"
+    ) {
+
+      closeLightbox();
+
+    }
+
+  }
+);
+
+</script>
+
+
+</body>
+</html>
