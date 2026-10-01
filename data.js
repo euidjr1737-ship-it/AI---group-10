@@ -77,11 +77,12 @@ const projectDays = [
 
     description: "",
 
-    prompt: "",
+    prompt:
+      "DAY 03에서 사용한 전체 프롬프트와 생성 과정은 아래 PDF 파일에서 확인할 수 있습니다.",
 
-    promptFile: "",
+    promptFile: "./day3-prompt.pdf",
 
-    promptFileName: "",
+    promptFileName: "DAY 03 · PROMPT PDF",
 
     note: ""
   }
@@ -91,6 +92,7 @@ const projectDays = [
 
 /* =====================================================
    DAY 04 — DAY 30
+   아직 업로드되지 않은 날짜
 ===================================================== */
 
 for (let i = 4; i <= 30; i++) {
